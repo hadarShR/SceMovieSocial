@@ -15,7 +15,10 @@ const Navbar = () => {
         <div className="pages">
           <ul>
             <li>
-              <a href="/">Movie</a>
+              <a href="/movie">Movie</a>
+            </li>
+            <li>
+              <a href="/tv">TV</a>
             </li>
             <li>
               <a href="/contact">Contact</a>
