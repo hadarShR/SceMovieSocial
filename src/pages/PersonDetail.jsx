@@ -32,7 +32,7 @@ const PersonDetail = () => {
         <div
           style={{ margin: "10rem", marginTop: "2rem", marginBottom: "9rem" }}
         >
-          {person && person.profile_path && person.birthday && (
+          {person && person.profile_path && person.birthday ? (
             <>
               <Box>
                 <Box
@@ -87,6 +87,17 @@ const PersonDetail = () => {
                 </div>
               </Box>
             </>
+          ) : (
+            <h2
+              style={{
+                fontSize: 25,
+                color: "white",
+                textAlign: "center",
+                paddingTop: "50px",
+              }}
+            >
+              No information about : {person ? `${person.name}` : "  "}
+            </h2>
           )}
         </div>
       )}

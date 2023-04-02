@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
-
 import { SwiperSlide, Swiper } from "swiper/react";
-import { Link } from "react-router-dom";
 import { getSimilar } from "../api/axiosClient";
-import apiConfig from "../api/apiConfig";
-import Button from "./Button";
+
 import MovieCard from "./MovieCard";
 
 import "../scss/movie-slide.scss";
@@ -19,7 +15,7 @@ const MovieSlide = (props) => {
       setItems(res);
     };
     getMovies();
-  }, [props.id]);
+  }, [props.id, props.type]);
 
   return (
     <div className="movie-list">

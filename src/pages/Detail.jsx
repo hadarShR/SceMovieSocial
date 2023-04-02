@@ -16,7 +16,6 @@ const Detail = () => {
   const item = location.state.item;
   const MediaType = location.state.MediaType;
   const [loading, setLoading] = useState(false);
-
   const [detail, setDetail] = useState(null);
   const [images, setImages] = useState(null);
 
