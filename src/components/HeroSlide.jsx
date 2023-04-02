@@ -10,7 +10,7 @@ import apiConfig from "../api/apiConfig";
 import "swiper/swiper-bundle.css";
 import "../scss/hero-slide.scss";
 
-import { getPopular } from "../api/axiosClient";
+import { getMediaList } from "../api/axiosClient";
 import GlobalLoading from "./GlobalLoading";
 
 const HeroSlide = () => {
@@ -20,7 +20,7 @@ const HeroSlide = () => {
   useEffect(() => {
     const fetchMovies = async () => {
       setLoading(true);
-      const response = await getPopular("movie");
+      const response = await getMediaList("movie", "popular");
       setPopularMovies(response);
       setLoading(false);
     };

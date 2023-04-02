@@ -13,9 +13,9 @@ const api = axios.create({
   },
 });
 
-export const getPopular = async (type) => {
+export const getMediaList = async (MediaType, MediaName) => {
   try {
-    const response = await api.get("/" + type + "/popular");
+    const response = await api.get("/" + MediaType + "/" + MediaName);
     return response.data.results;
   } catch (error) {
     console.error(error);

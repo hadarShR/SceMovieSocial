@@ -12,11 +12,11 @@ const VideoSlide = (props) => {
 
   useEffect(() => {
     const getVideos = async () => {
-      const res = await getVideo("movie", props.id);
+      const res = await getVideo(props.type, props.id);
       setVideos(res.slice(0, 5));
     };
     getVideos();
-  }, [category, props.id]);
+  }, [category, props.id, props.type]);
 
   return (
     <>

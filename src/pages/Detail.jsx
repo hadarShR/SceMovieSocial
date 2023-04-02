@@ -86,7 +86,7 @@ const Detail = () => {
                         <h2>CAST</h2>
                       </div>
                     </div>
-                    <CastSlide id={item.id} />
+                    <CastSlide type={MediaType} id={item.id} />
                   </div>
                 </div>
               </div>
@@ -103,7 +103,7 @@ const Detail = () => {
                   >
                     <h2>VIDEOS</h2>
                   </div>
-                  <VideoSlide id={item.id} />
+                  <VideoSlide type={MediaType} id={item.id} />
                 </div>
 
                 {/* media backdrop */}

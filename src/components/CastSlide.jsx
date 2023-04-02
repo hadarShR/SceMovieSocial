@@ -11,7 +11,7 @@ const CastSlide = (props) => {
 
   useEffect(() => {
     const getCredits = async () => {
-      const res = await getCast("movie", props.id);
+      const res = await getCast(props.type, props.id);
       setCasts(res);
     };
     getCredits();
