@@ -1,8 +1,6 @@
 import { Grid } from "@mui/material";
 import { useEffect, useState } from "react";
 import { OutlineButton } from "./Button";
-
-import { toast } from "react-toastify";
 import { getPersonMedia } from "../api/axiosClient";
 import MediaItem from "./MediaItem";
 
