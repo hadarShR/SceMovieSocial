@@ -11,50 +11,60 @@ import "swiper/swiper-bundle.css";
 import "../scss/hero-slide.scss";
 
 import { getPopular } from "../api/axiosClient";
+import GlobalLoading from "./GlobalLoading";
 
 const HeroSlide = () => {
   const [popularMovies, setPopularMovies] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchMovies = async () => {
+      setLoading(true);
       const response = await getPopular("movie");
       setPopularMovies(response);
+      setLoading(false);
     };
     fetchMovies();
   }, []);
 
   return (
-    <div className="hero-slide">
-      <Swiper
-        modules={[Keyboard, Pagination, Navigation, Autoplay, A11y]}
-        Pagination={{ clickable: true }}
-        pagination={{ clickable: true }}
-        navigation={true}
-        grabCursor={true}
-        spaceBetween={0}
-        slidesPerView={1}
-        keyboard={{
-          enabled: true,
-        }}
-        style={{
-          "--swiper-pagination-color": "#FFBA08",
-          "--swiper-pagination-bullet-inactive-color": "#999999",
-        }}
-        //autoplay={{ delay: 3000 }}
-      >
-        {popularMovies &&
-          popularMovies.map((item, i) => (
-            <SwiperSlide key={i}>
-              {({ isActive }) => (
-                <HeroSlideItem
-                  item={item}
-                  className={`${isActive ? "active" : ""}`}
-                />
-              )}
-            </SwiperSlide>
-          ))}
-      </Swiper>
-    </div>
+    <>
+      {loading ? (
+        <GlobalLoading />
+      ) : (
+        <div className="hero-slide">
+          <Swiper
+            modules={[Keyboard, Pagination, Navigation, Autoplay, A11y]}
+            Pagination={{ clickable: true }}
+            pagination={{ clickable: true }}
+            navigation={true}
+            grabCursor={true}
+            spaceBetween={0}
+            slidesPerView={1}
+            keyboard={{
+              enabled: true,
+            }}
+            style={{
+              "--swiper-pagination-color": "#FFBA08",
+              "--swiper-pagination-bullet-inactive-color": "#999999",
+            }}
+            //autoplay={{ delay: 3000 }}
+          >
+            {popularMovies &&
+              popularMovies.map((item, i) => (
+                <SwiperSlide key={i}>
+                  {({ isActive }) => (
+                    <HeroSlideItem
+                      item={item}
+                      className={`${isActive ? "active" : ""}`}
+                    />
+                  )}
+                </SwiperSlide>
+              ))}
+          </Swiper>
+        </div>
+      )}
+    </>
   );
 };
 
