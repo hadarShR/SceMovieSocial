@@ -35,7 +35,6 @@ const HeroSlide = () => {
         <div className="hero-slide">
           <Swiper
             modules={[Keyboard, Pagination, Navigation, Autoplay, A11y]}
-            Pagination={{ clickable: true }}
             pagination={{ clickable: true }}
             navigation={true}
             grabCursor={true}

@@ -7,10 +7,9 @@ const BackdropSlide = ({ backdrops }) => {
   return (
     <Swiper
       modules={[Pagination, Navigation, A11y]}
-      Pagination={{ clickable: true }}
+      pagination={{ clickable: true }}
       navigation={true}
       grabCursor={true}
-      pagination={{ clickable: true }}
       spaceBetween={20}
       slidesPerView={1.25}
       centeredSlides

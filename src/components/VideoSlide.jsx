@@ -23,7 +23,6 @@ const VideoSlide = (props) => {
       <Swiper
         modules={[Keyboard, Pagination, Navigation, A11y]}
         navigation={true}
-        Pagination={{ clickable: true }}
         pagination={{ clickable: true }}
         grabCursor={true}
         spaceBetween={0}
