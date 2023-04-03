@@ -84,3 +84,14 @@ export const getPersonMedia = async (personId) => {
     console.error(error);
   }
 };
+
+export const SearchMedia = async (mediaType, query) => {
+  try {
+    const response = await api.get("/search/" + mediaType, {
+      params: { query: query },
+    });
+    return response.data.results;
+  } catch (error) {
+    console.error(error);
+  }
+};
