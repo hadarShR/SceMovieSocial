@@ -1,17 +1,29 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { SearchMedia } from "../api/axiosClient.js";
+import { Grid } from "@mui/material";
+import MediaItem from "../components/MediaItem.jsx";
 
 const Search = () => {
   const [media, setMedia] = useState([]);
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [mediaType, setmediaType] = useState("");
 
   function handlePageChange(newPage) {
     setPage(newPage);
     handleSearch(null, newPage); // Pass the new page value as a parameter
   }
+  const mediaTypeChange = (type) => {
+    if (type === "movie") {
+      setmediaType("movie");
+    } else if (type === "tv") {
+      setmediaType("tv");
+    } else {
+      setmediaType("person");
+    }
+  };
 
   async function handleSearch(event, pageNum = 1) {
     if (event) {
@@ -23,14 +35,12 @@ const Search = () => {
       setPage(1);
       setTotalPages(1);
     } else {
-      const Response = await SearchMedia("movie", search, pageNum);
+      const Response = await SearchMedia(mediaType, search, pageNum);
       setMedia(Response.results);
       setTotalPages(Response.total_pages);
     }
   }
-  console.log(media);
-  console.log(page);
-  console.log(search);
+
   return (
     <StyledSection>
       <div>
@@ -48,17 +58,58 @@ const Search = () => {
             </button>
           </div>
         </form>
+        <div className="mediaTypebutton">
+          <button
+            type="button"
+            className={mediaType === "movie" ? "selected" : ""}
+            onClick={() => mediaTypeChange("movie")}
+          >
+            Movie
+          </button>
+          <button
+            type="button"
+            className={mediaType === "tv" ? "selected" : ""}
+            onClick={() => mediaTypeChange("tv")}
+          >
+            TV
+          </button>
+          <button
+            type="button"
+            className={mediaType === "person" ? "selected" : ""}
+            onClick={() => mediaTypeChange("person")}
+          >
+            Person
+          </button>
+        </div>
 
-        {media.map((movie) => (
-          <div key={movie.id}>{movie.title}</div>
-        ))}
+        <Grid container spacing={1} sx={{ marginRight: "-8px!important" }}>
+          {media.map((media, index) => (
+            <Grid item xs={6} sm={4} md={3} key={index}>
+              <div style={{ padding: "1rem", paddingTop: "4.5rem" }}>
+                <MediaItem media={media} mediaType={mediaType} />
+              </div>
+            </Grid>
+          ))}
+        </Grid>
         <div className="page-button">
-          {Array.from({ length: totalPages }, (_, i) => i + 1).map(
-            (pageNum) => (
-              <button key={pageNum} onClick={() => handlePageChange(pageNum)}>
+          {page > 1 && (
+            <button onClick={() => handlePageChange(page - 1)}>Previous</button>
+          )}
+          {Array.from({ length: totalPages > 10 ? 10 : totalPages }, (_, i) => {
+            const pageNum = page > 5 && totalPages > 10 ? page - 5 + i : i + 1;
+            return pageNum <= totalPages ? (
+              <button
+                key={pageNum}
+                onClick={() => handlePageChange(pageNum)}
+                className={pageNum === page ? "active" : ""}
+              >
                 {pageNum}
               </button>
-            )
+            ) : null;
+          })}
+
+          {page < totalPages && (
+            <button onClick={() => handlePageChange(page + 1)}>Next</button>
           )}
         </div>
       </div>
@@ -82,6 +133,8 @@ const StyledSection = styled.section`
     width: 40%;
     background-color: rgba(204, 204, 204, 0.8);
     border: 2px solid black;
+    padding-left: 10px;
+    font-weight: bold;
   }
   .Search-input input:focus {
     transition: 0.3s;
@@ -113,6 +166,10 @@ const StyledSection = styled.section`
     display: flex;
     justify-content: center;
     margin-top: 1rem;
+    padding-top: 4.5rem;
+    padding-bottom: 2rem;
+    align-items: center;
+    flex-wrap: wrap;
   }
 
   .page-button button {
@@ -124,12 +181,49 @@ const StyledSection = styled.section`
     cursor: pointer;
     border-radius: 0.25rem;
     transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    white-space: nowrap;
+    font-weight: bold;
   }
 
   .page-button button:hover,
   .page-button button:focus {
     background-color: #333333;
     color: #ffffff;
+  }
+
+  .mediaTypebutton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .selected {
+      background-color: #333333;
+      color: #ffffff;
+    }
+
+    button {
+      background-color: white;
+      color: #333333;
+      border: none;
+      margin: 0.5rem;
+      cursor: pointer;
+      border-radius: 0.25rem;
+      transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+      padding: 10px 20px;
+      font-size: 16px;
+      font-weight: bold;
+    }
+    button:focus {
+      background-color: #4444;
+      color: #ffffff;
+    }
+  }
+  .page-button button.active {
+    background-color: #333333;
+    color: #ffffff;
+  }
+
+  .page-button button + button {
+    margin-left: 0.5rem;
   }
 `;
 
