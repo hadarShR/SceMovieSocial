@@ -52,14 +52,20 @@ const MediaItem = ({ media, mediaType }) => {
       {media && (
         <>
           <div>
-            <Link to="/detail" state={{ item: media, MediaType: mediaType }}>
+            <Link
+              to={mediaType !== "person" ? "/detail" : "/personDetails"}
+              state={{
+                item: mediaType !== "person" ? media : media.id,
+                MediaType: mediaType,
+              }}
+            >
               <Button>
                 <div style={{ scale: "1.4", paddingTop: "3px" }}>
                   <PlayArrowIcon />
                 </div>
               </Button>
             </Link>
-            <h2>({releaseDate})</h2>
+            <h2>{releaseDate ? "(" + releaseDate + ")" : ""}</h2>
           </div>
           <h3>{title}</h3>
         </>

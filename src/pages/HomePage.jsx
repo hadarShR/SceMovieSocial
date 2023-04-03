@@ -14,7 +14,15 @@ const HomePage = () => {
       <HeroSlide />
       <div className="container">
         <div className="section mb-3">
-          <div className="section__header mb-2">
+          <div
+            className="section__header mb-2"
+            style={{
+              textDecorationLine: "underline",
+              textDecorationColor: "#FFBA08",
+              textDecorationThickness: "4px",
+              textUnderlineOffset: "0.5rem",
+            }}
+          >
             <h2>Upcoming Movies</h2>
             <Link to="/movie">
               <OutlineButton className="small">View more</OutlineButton>
@@ -24,7 +32,15 @@ const HomePage = () => {
         </div>
 
         <div className="section mb-3">
-          <div className="section__header mb-2">
+          <div
+            className="section__header mb-2"
+            style={{
+              textDecorationLine: "underline",
+              textDecorationColor: "#FFBA08",
+              textDecorationThickness: "4px",
+              textUnderlineOffset: "0.5rem",
+            }}
+          >
             <h2>Top Rated Movies</h2>
             <Link to="/movie">
               <OutlineButton className="small">View more</OutlineButton>
@@ -34,7 +50,15 @@ const HomePage = () => {
         </div>
 
         <div className="section mb-3">
-          <div className="section__header mb-2">
+          <div
+            className="section__header mb-2"
+            style={{
+              textDecorationLine: "underline",
+              textDecorationColor: "#FFBA08",
+              textDecorationThickness: "4px",
+              textUnderlineOffset: "0.5rem",
+            }}
+          >
             <h2>Trending TV</h2>
             <Link to="/tv">
               <OutlineButton className="small">View more</OutlineButton>
@@ -44,7 +68,15 @@ const HomePage = () => {
         </div>
 
         <div className="section mb-3">
-          <div className="section__header mb-2">
+          <div
+            className="section__header mb-2"
+            style={{
+              textDecorationLine: "underline",
+              textDecorationColor: "#FFBA08",
+              textDecorationThickness: "4px",
+              textUnderlineOffset: "0.5rem",
+            }}
+          >
             <h2>Top Rated TV</h2>
             <Link to="/tv">
               <OutlineButton className="small">View more</OutlineButton>

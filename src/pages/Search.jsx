@@ -5,24 +5,35 @@ import { Grid } from "@mui/material";
 import MediaItem from "../components/MediaItem.jsx";
 
 const Search = () => {
-  const [media, setMedia] = useState([]);
-  const [search, setSearch] = useState("");
-  const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
-  const [mediaType, setmediaType] = useState("");
+  const [media, setMedia] = useState(() => {
+    const storedMedia = localStorage.getItem("media");
+    return storedMedia ? JSON.parse(storedMedia) : [];
+  });
+  const [search, setSearch] = useState(() => {
+    const storedSearch = localStorage.getItem("search");
+    return storedSearch ? storedSearch : "";
+  });
+  const [page, setPage] = useState(() => {
+    const storedPage = localStorage.getItem("page");
+    return storedPage ? parseInt(storedPage) : 1;
+  });
+  const [totalPages, setTotalPages] = useState(() => {
+    const storedTotalPages = localStorage.getItem("totalPages");
+    return storedTotalPages ? parseInt(storedTotalPages) : 1;
+  });
+  const [mediaType, setmediaType] = useState(() => {
+    const storedMediaType = localStorage.getItem("mediaType");
+    return storedMediaType ? storedMediaType : "";
+  });
 
   function handlePageChange(newPage) {
     setPage(newPage);
     handleSearch(null, newPage); // Pass the new page value as a parameter
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
+
   const mediaTypeChange = (type) => {
-    if (type === "movie") {
-      setmediaType("movie");
-    } else if (type === "tv") {
-      setmediaType("tv");
-    } else {
-      setmediaType("person");
-    }
+    setmediaType(type);
   };
 
   async function handleSearch(event, pageNum = 1) {
@@ -34,12 +45,26 @@ const Search = () => {
       setMedia([]);
       setPage(1);
       setTotalPages(1);
+      localStorage.removeItem("media");
+      localStorage.removeItem("page");
+      localStorage.removeItem("totalPages");
+      localStorage.removeItem("search");
     } else {
       const Response = await SearchMedia(mediaType, search, pageNum);
       setMedia(Response.results);
       setTotalPages(Response.total_pages);
+      localStorage.setItem("media", JSON.stringify(Response.results));
+      localStorage.setItem("page", pageNum);
+      localStorage.setItem("totalPages", Response.total_pages);
+      localStorage.setItem("search", search);
     }
   }
+
+  useEffect(() => {
+    handleSearch(null, page);
+    localStorage.setItem("mediaType", mediaType);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [mediaType]);
 
   return (
     <StyledSection>
@@ -82,10 +107,15 @@ const Search = () => {
           </button>
         </div>
 
-        <Grid container spacing={1} sx={{ marginRight: "-8px!important" }}>
+        <Grid
+          className="media"
+          container
+          spacing={1}
+          sx={{ marginRight: "-8px!important" }}
+        >
           {media.map((media, index) => (
-            <Grid item xs={6} sm={4} md={3} key={index}>
-              <div style={{ padding: "1rem", paddingTop: "4.5rem" }}>
+            <Grid item xs={6} sm={5} md={3} key={index}>
+              <div style={{ padding: "1.5rem", paddingTop: "4.5rem" }}>
                 <MediaItem media={media} mediaType={mediaType} />
               </div>
             </Grid>
@@ -95,18 +125,23 @@ const Search = () => {
           {page > 1 && (
             <button onClick={() => handlePageChange(page - 1)}>Previous</button>
           )}
-          {Array.from({ length: totalPages > 10 ? 10 : totalPages }, (_, i) => {
-            const pageNum = page > 5 && totalPages > 10 ? page - 5 + i : i + 1;
-            return pageNum <= totalPages ? (
-              <button
-                key={pageNum}
-                onClick={() => handlePageChange(pageNum)}
-                className={pageNum === page ? "active" : ""}
-              >
-                {pageNum}
-              </button>
-            ) : null;
-          })}
+          {media.length !== 0 &&
+            Array.from(
+              { length: totalPages > 10 ? 10 : totalPages },
+              (_, i) => {
+                const pageNum =
+                  page > 5 && totalPages > 10 ? page - 5 + i : i + 1;
+                return pageNum <= totalPages ? (
+                  <button
+                    key={pageNum}
+                    onClick={() => handlePageChange(pageNum)}
+                    className={pageNum === page ? "active" : ""}
+                  >
+                    {pageNum}
+                  </button>
+                ) : null;
+              }
+            )}
 
           {page < totalPages && (
             <button onClick={() => handlePageChange(page + 1)}>Next</button>
@@ -173,10 +208,12 @@ const StyledSection = styled.section`
   }
 
   .page-button button {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1rem;
     background-color: #ffffff;
     color: #333333;
     border: none;
-    padding: 0.5rem;
+    padding: 0.5rem 1rem;
     margin: 0 0.25rem;
     cursor: pointer;
     border-radius: 0.25rem;
