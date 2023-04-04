@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
 import styled from "styled-components";
 import { FaFacebookF, FaInstagram } from "react-icons/fa";
 import MoodleLogo from "../assets/pngwing.com.png";
@@ -7,13 +9,14 @@ import { useNavigate } from "react-router";
 import { useEffect } from "react";
 
 const LoginPage = () => {
-  const { googleSignIn, user } = UserAuth();
+  const { googleSignIn, createUserDocument, user } = UserAuth();
 
   const navigate = useNavigate();
 
   const handleGoogleSignIn = async () => {
     try {
-      await googleSignIn();
+      const { user } = await googleSignIn();
+      const userDocRef = await createUserDocument(user);
     } catch (error) {
       console.log(error);
     }
