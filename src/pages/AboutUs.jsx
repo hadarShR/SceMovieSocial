@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from "styled-components";
-import BackgroundImage from "../assets/pngwing.com.png";
+import BackgroundImage from "../assets/About_Us.png";
 
 const AboutUs=()=> {
   return (
@@ -24,14 +24,24 @@ const AboutUs=()=> {
                 <div className="content">
                   <h2>Our Story</h2>
                   <p>
-                    Our development team is called the "M.V" team, a team made
-                    up of two programmers who study at Sami Shamoon College. Our
-                    names are Vova Davidzon and Michael Ilkanayev. We live in
+                    Our development team is called the "M.V.S.H" team, a team made
+                    up of four programmers who study at Sami Shamoon College. Our
+                    names are Vova Davidzon, Michael Ilkanayev, Hadar Shushan and Shilat Tsfoni. We live in
                     israel.
                   </p>
                 </div>
+                <div className="content">
+                <h2>Our Site</h2>
+                  <p>
+                   SceMovieSocial is the world’s most trusted recommendation resource for quality entertainment. 
+                  As the leading online aggregator of movie and TV show reviews from critics, we provide users 
+                  with a comprehensive guide to what’s Fresh in theaters and at home.
+                  Our site allowing users to connect with people with similar interests, share their movie reviews 
+                  and viewing experiences with them. You can also use this platform to discover new movies 
+                  and see what others think about them.
+                  </p>
+                </div>
                 {/*skills content */}
-
                 <div className="content ">
                   <h2>Skills</h2>
                   <p>The skills we had to learn to make this site.</p>
@@ -68,17 +78,6 @@ const AboutUs=()=> {
                         </div>
                       </div>
                     </div>
-
-                    <div className="skills-column">
-                      <div className="progress-wrap">
-                        <h3>mvc</h3>
-                        <div className="progress">
-                          <div className="progress-bar mvc">
-                            <span>100%</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -101,7 +100,7 @@ const Styledaboutus = styled.div`
   }
   .about {
     padding: 5rem 3rem 3rem 3rem;
-    background: #f8f8f8;
+    background: white;
   }
   .row {
     display: flex;
@@ -130,9 +129,9 @@ const Styledaboutus = styled.div`
     position: relative;
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: center;
-    height: 100%;
-    width: 90%;
+    background-position: left;
+    height: 60%;
+    width: 100%;
   }
   .content {
     padding-top: 1.5rem;
@@ -143,6 +142,7 @@ const Styledaboutus = styled.div`
     font-weight: 700;
     line-height: 1.4;
     margin-bottom: 1rem;
+    color: black;
   }
   .content p {
     padding-bottom: 1rem;
@@ -156,6 +156,7 @@ const Styledaboutus = styled.div`
     line-height: 1.5;
     font-weight: 700;
     margin-bottom: 1rem;
+    color: black;
   }
   .skills-row {
     margin-top: 2rem;
@@ -165,6 +166,7 @@ const Styledaboutus = styled.div`
   .skills-column {
     margin-bottom: 30px;
     margin-right: 20px;
+    color: black;
   }
   .progress-wrap h3 {
     font-size: 14px !important;
