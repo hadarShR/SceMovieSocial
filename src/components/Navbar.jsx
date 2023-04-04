@@ -21,13 +21,13 @@ const Navbar = () => {
               <a href="/tv">TV</a>
             </li>
             <li>
-              <a href="/contact">Contact</a>
+              <a href="/search">Search</a>
+            </li>
+            <li>
+              <a href="/contact">Contact-us</a>
             </li>
             <li>
               <a href="/aboutus">About-us</a>
-            </li>
-            <li>
-              <a href="/search">Search</a>
             </li>
           </ul>
         </div>
@@ -40,33 +40,64 @@ const Navbar = () => {
 };
 
 const Nav = styled.nav`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
   font-size: 20px;
   font-weight: 600;
   background-image: linear-gradient(
     260deg,
-    rgb(42, 244, 152, 255) 0%,
+    rgb(42, 244, 152, 1) 0%,
     #3498db 100%
   );
-  height: 75px;
-  display: flex;
   justify-content: space-between;
   padding-left: 2rem;
   z-index: 10;
-  align-items: center;
+
+  .brand {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .pages {
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 0;
+      padding: 0;
+
+      li {
+        margin: 0.5rem;
+
+        a {
+          padding: 0.5rem;
+          border-radius: 0.5rem;
+          text-decoration: none;
+          color: #333;
+
+          &:hover {
+            background-color: #333;
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
 
   button {
-    display: flex;
-    align-items: right;
-    margin-right: 24px;
-    justify-content: right;
-    font-weight: 499;
-    margin-left: 35rem;
+    background-color: #333;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    border: none;
+    margin-top: 1rem;
 
-    @media screen and (max-width: 768px) {
-      display: none;
-    }
     padding: 0.5rem 1rem;
     cursor: pointer;
+    margin-right: 24px;
+    font-weight: 499;
     border-radius: 1rem;
     border: none;
     color: white;
@@ -79,27 +110,12 @@ const Nav = styled.nav`
       background-color: #023e8a;
     }
   }
-
-  h5 {
-    transition: 0.3s ease-in-out;
-    color: #023e8a;
-    font-weight: 2000;
-    font-size: 1.1rem;
-    justify-content: right;
-    display: flex;
-    align-items: left;
-    padding: 0rem -1rem;
-  }
   .brand {
     padding-right: 4rem;
 
     .container {
       cursor: pointer;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       gap: 0.4rem;
-      font-size: 1.5rem;
       font-weight: 900;
       text-transform: uppercase;
       transition: 0.1s ease-in-out;
@@ -114,8 +130,6 @@ const Nav = styled.nav`
     }
   }
   ul {
-    display: flex;
-    gap: 1rem;
     list-style-type: none;
     li {
       a {
@@ -130,24 +144,29 @@ const Nav = styled.nav`
       }
     }
   }
-  @media screen and (min-width: 280px) and (max-width: 1080px) {
+  @media (min-width: 768px) {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
     .brand {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 100%;
-      .toggle {
-        display: block;
+      margin-bottom: 0;
+    }
+
+    .pages {
+      ul {
+        li {
+          margin: 0;
+
+          a {
+            padding: 0.5rem 1rem;
+          }
+        }
       }
     }
-    h5 {
-      display: none;
-    }
-    ul {
-      display: none;
-    }
+
     button {
-      display: none;
+      margin-top: 0;
     }
   }
 `;

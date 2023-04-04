@@ -1,9 +1,30 @@
 import styled from "styled-components";
 import { FaFacebookF, FaInstagram } from "react-icons/fa";
-import { LoginButton } from "../components/Button";
 import MoodleLogo from "../assets/pngwing.com.png";
+import { UserAuth } from "../context/AuthContext";
+import { Button } from "@mui/material";
+import { useNavigate } from "react-router";
+import { useEffect } from "react";
 
 const LoginPage = () => {
+  const { googleSignIn, user } = UserAuth();
+
+  const navigate = useNavigate();
+
+  const handleGoogleSignIn = async () => {
+    try {
+      await googleSignIn();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    if (user != null) {
+      navigate("/");
+    }
+  }, [user]);
+
   const FacebookBackground =
     "linear-gradient(to right, #0546A0 0%, #0546A0 40%, #663FB6 100%)";
   const InstagramBackground =
@@ -18,9 +39,21 @@ const LoginPage = () => {
             width="80%"
           ></img>
           <h1>SCE MOVIE SOCIAL</h1>
+
           <ButtonContainer>
-            <LoginButton content="Sign Up" />
+            <Button
+              onClick={handleGoogleSignIn}
+              style={{
+                color: "#fff",
+                textShadow: "1px 1px #000",
+                fontSize: "20px",
+                fontFamily: "Montserrat",
+              }}
+            >
+              SIGN UP
+            </Button>
           </ButtonContainer>
+
           <LoginWith>LINKS:</LoginWith>
           <HorizontalRule />
           <IconsContainer>
@@ -167,6 +200,25 @@ const ButtonContainer = styled.div`
   align-items: center;
   justify-content: center;
   padding-bottom: 3rem;
+  button {
+    background-color: #14163c;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    width: 65%;
+    height: 3rem;
+    border: none;
+    color: white;
+    border-radius: 2rem;
+    font-size: 0.8rem;
+    cursor: pointer;
+    background-color: #f57c00;
+    border-radius: 0.3rem;
+    font-size: 1.2rem;
+    transition: 0.3s ease-in-out;
+    &:hover {
+      background-color: #ffa000;
+    }
+  }
 `;
 
 const LoginWith = styled.h5`
