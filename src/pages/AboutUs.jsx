@@ -8,6 +8,7 @@ const AboutUs=()=> {
     <>
       
       <Styledaboutus>
+        <h1>About Us</h1>
         <section className="about">
           <div className="row">
             <div className="column">
