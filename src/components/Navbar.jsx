@@ -1,8 +1,25 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { UserAuth } from "../context/AuthContext";
+import { useNavigate } from "react-router";
 
 const Navbar = () => {
+
+  const { user, logOut } = UserAuth();
+
+  const navigate = useNavigate();
+
+  const handlesSignOut = async () => {
+    try {
+      await logOut();
+      navigate("/");
+    } 
+    catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <>
       <Nav>
@@ -31,9 +48,18 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
-        <button>
-          <Link to="/login">Sign In</Link>
+
+        {user?.displayName? (
+          <button onClick={handlesSignOut}>
+          Sign Out
         </button>
+        ):(
+          <button>
+          <Link to="/login">Sign in</Link>
+        </button>
+        )}
+
+        
       </Nav>
     </>
   );
