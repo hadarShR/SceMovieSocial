@@ -3,11 +3,11 @@ import styled from "styled-components";
 import BackgroundImage from "../assets/About_Us.png";
 
 const AboutUs=()=> {
+  window.scrollTo(0, 0);
   return (
     <>
       
       <Styledaboutus>
-        <h1>About Us</h1>
         <section className="about">
           <div className="row">
             <div className="column">
