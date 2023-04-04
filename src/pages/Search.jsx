@@ -63,6 +63,7 @@ const Search = () => {
   useEffect(() => {
     handleSearch(null, page);
     localStorage.setItem("mediaType", mediaType);
+    setPage(1);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mediaType]);
 

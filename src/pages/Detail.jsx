@@ -18,6 +18,8 @@ const Detail = () => {
   const [loading, setLoading] = useState(false);
   const [detail, setDetail] = useState(null);
   const [images, setImages] = useState(null);
+  const [runtime, setRuntime] = useState("");
+  const [release_date, setReleaseDate] = useState("");
 
   useEffect(() => {
     const getDetail = async () => {
@@ -28,6 +30,15 @@ const Detail = () => {
 
       setDetail(DetailsResponse);
       setImages(ImagesResponse);
+
+      if (MediaType === "movie") {
+        setRuntime(DetailsResponse.runtime);
+        setReleaseDate(DetailsResponse.release_date);
+      } else {
+        setRuntime(DetailsResponse.seasons.length);
+        setReleaseDate(DetailsResponse.first_air_date);
+      }
+
       setLoading(false);
     };
     getDetail();
@@ -71,7 +82,17 @@ const Detail = () => {
                       ))}
                   </div>
                   <p className="overview">{item.overview}</p>
-                  <p>Release date : {item.release_date}</p>
+                  <div className="time" style={{ display: "flex" }}>
+                    <p style={{}}>Release date : {release_date}</p>
+                    {MediaType === "movie" ? (
+                      <p style={{ marginLeft: "3rem" }}>
+                        Runtime : {runtime}min
+                      </p>
+                    ) : (
+                      <p style={{ marginLeft: "3rem" }}>Seasons : {runtime}</p>
+                    )}
+                  </div>
+
                   <div className="cast">
                     <div className="section__header">
                       <div
