@@ -14,11 +14,11 @@ import { auth, db } from "../firebase/firebase";
 const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
-  const [user, setUser] = useState({});
-
+  const [user, setUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const logOut = () => {
     signOut(auth);
-  }
+  };
 
   const googleSignIn = () => {
     const provider = new GoogleAuthProvider();
@@ -58,9 +58,11 @@ export const AuthContextProvider = ({ children }) => {
   };
 
   useEffect(() => {
+    setIsLoading(true);
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       console.log("User", currentUser);
+      setIsLoading(false);
     });
 
     return () => {
@@ -69,7 +71,9 @@ export const AuthContextProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ googleSignIn, createUserDocument, user, logOut }}>
+    <AuthContext.Provider
+      value={{ googleSignIn, createUserDocument, user, logOut, isLoading }}
+    >
       {children}
     </AuthContext.Provider>
   );
