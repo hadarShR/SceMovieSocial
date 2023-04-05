@@ -1,24 +1,44 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { UserAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router";
 
 const Navbar = () => {
-
-  const { user, logOut } = UserAuth();
-
+  const { user, logOut, isLoading } = UserAuth();
   const navigate = useNavigate();
 
   const handlesSignOut = async () => {
     try {
       await logOut();
-      navigate("/");
-    } 
-    catch (error) {
-      console.log(error)
+
+      navigate("/", { state: { SignOut: true } });
+    } catch (error) {
+      console.log(error);
     }
-  }
+  };
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    if (user) {
+      setIsOpen(!isOpen);
+    }
+  };
+
+  const handleOptionClick = (option) => {
+    setIsOpen(false);
+
+    switch (option) {
+      case "signOut":
+        handlesSignOut();
+        break;
+      case "profile":
+        break;
+      default:
+        break;
+    }
+  };
 
   return (
     <>
@@ -49,17 +69,38 @@ const Navbar = () => {
           </ul>
         </div>
 
-        {user?.displayName? (
-          <button onClick={handlesSignOut}>
-          Sign Out
-        </button>
-        ):(
-          <button>
-          <Link to="/login">Sign in</Link>
-        </button>
-        )}
-
-        
+        <div className="dropdown">
+          <button className="dropdown-toggle" onClick={toggleDropdown}>
+            {isLoading ? (
+              <button>loading</button>
+            ) : user ? (
+              <button>{user?.displayName}</button>
+            ) : (
+              <button>
+                <Link to="/login">Sign in</Link>
+              </button>
+            )}
+          </button>
+          {isOpen && user && (
+            <ul className="dropdown-menu">
+              <li>
+                <button onClick={() => handleOptionClick("profile")}>
+                  Profile
+                </button>
+              </li>
+              <li>
+                <button onClick={() => handleOptionClick("profile")}>
+                  favourites
+                </button>
+              </li>
+              <li>
+                <button onClick={() => handleOptionClick("signOut")}>
+                  Sign OUT
+                </button>
+              </li>
+            </ul>
+          )}
+        </div>
       </Nav>
     </>
   );
@@ -80,6 +121,94 @@ const Nav = styled.nav`
   justify-content: space-between;
   padding-left: 2rem;
   z-index: 10;
+
+  .dropdown {
+    margin-top: -20px;
+    position: relative;
+  }
+
+  .dropdown button {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+
+  .dropdown-toggle {
+    background-color: #333;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    border: none;
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    margin-right: 24px;
+    font-weight: 499;
+    border-radius: 1rem;
+    border: none;
+    color: white;
+    background-color: #023e8a;
+    font-size: 1.1rem;
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
+    transition: 0.3s ease-in-out;
+  }
+
+  .dropdown-toggle:hover {
+    background-color: #023e8a;
+  }
+
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin: 0;
+    padding: 0.5rem 0;
+    list-style: none;
+    background-color: #fff;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.5);
+    z-index: 999;
+  }
+
+  .dropdown-menu li {
+    margin: 0.8rem;
+  }
+
+  .dropdown-menu button {
+    display: block;
+    width: 100%;
+    padding: 0.5rem;
+    background-color: transparent;
+    border: none;
+    color: #333;
+    text-align: left;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    color: #000;
+  }
+
+  .dropdown-menu button:hover {
+    background-color: #fsadaa;
+    color: white;
+  }
+
+  @media only screen and (max-width: 600px) {
+    .dropdown-menu li {
+      margin: 0.8rem 0;
+    }
+
+    .dropdown {
+      margin-top: 0.5px;
+    }
+    .dropdown button {
+      padding: 0.5rem;
+      padding-top: 0rem;
+    }
+  }
 
   .brand {
     font-size: 1.5rem;

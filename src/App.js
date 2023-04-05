@@ -10,11 +10,13 @@ import AboutUs from "./pages/AboutUs";
 import Search from "./pages/Search";
 import { AuthContextProvider } from "./context/AuthContext";
 import PopUp from "./components/PopUp";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
-
   return (
     <>
+      <ToastContainer />
       <AuthContextProvider>
         <Navbar />
         <Routes>
@@ -24,7 +26,7 @@ const App = () => {
           <Route path="/personDetails" element={<PersonDetail />} />
           <Route path="/aboutus" element={<AboutUs />} />
           <Route path="/search" element={<Search />} />
-          <Route path="/test" element={<PopUp/>}/>
+          <Route path="/test" element={<PopUp />} />
         </Routes>
         <Footer />
       </AuthContextProvider>

@@ -82,3 +82,28 @@ iframe {
 .section__header {
   @include flex(center, space-between);
 }
+
+.toast-container {
+  z-index: 9999;
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  max-width: 350px;
+}
+
+.toast-custom {
+  background-color: #3fc1c9;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 8px;
+  box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
+}
+
+.toast-progress {
+  background-color: #fff;
+}
+
+.toast-body {
+  font-family: sans-serif;
+}

@@ -7,6 +7,7 @@ import { UserAuth } from "../context/AuthContext";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router";
 import { useEffect } from "react";
+import { toast } from "react-toastify";
 
 const LoginPage = () => {
   const { googleSignIn, createUserDocument, user } = UserAuth();
@@ -17,16 +18,30 @@ const LoginPage = () => {
     try {
       const { user } = await googleSignIn();
       const userDocRef = await createUserDocument(user);
+
+      if (user) {
+        toast.success("You have successfully signed in!", {
+          position: "bottom-left",
+          autoClose: 3000,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          toastId: "custom_success",
+          bodyClassName: "toast-body",
+          progressClassName: "toast-progress",
+          className: "toast-custom",
+        });
+      }
     } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(() => {
-    if (user != null) {
+    if (user !== null) {
       navigate("/");
     }
-  }, [user]);
+  }, [user, navigate]);
 
   const FacebookBackground =
     "linear-gradient(to right, #0546A0 0%, #0546A0 40%, #663FB6 100%)";
