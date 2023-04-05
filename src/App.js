@@ -9,8 +9,10 @@ import LoginPage from "./pages/LoginPage";
 import AboutUs from "./pages/AboutUs";
 import Search from "./pages/Search";
 import { AuthContextProvider } from "./context/AuthContext";
+import PopUp from "./components/PopUp";
 
 const App = () => {
+
   return (
     <>
       <AuthContextProvider>
@@ -22,6 +24,7 @@ const App = () => {
           <Route path="/personDetails" element={<PersonDetail />} />
           <Route path="/aboutus" element={<AboutUs />} />
           <Route path="/search" element={<Search />} />
+          <Route path="/test" element={<PopUp/>}/>
         </Routes>
         <Footer />
       </AuthContextProvider>
