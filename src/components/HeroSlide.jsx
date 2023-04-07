@@ -12,6 +12,7 @@ import "../scss/hero-slide.scss";
 
 import { getMediaList } from "../api/axiosClient";
 import GlobalLoading from "./GlobalLoading";
+import {UserAuth} from "../context/AuthContext";
 
 const HeroSlide = () => {
   const [popularMovies, setPopularMovies] = useState([]);
@@ -69,7 +70,7 @@ const HeroSlide = () => {
 
 const HeroSlideItem = (props) => {
   const item = props.item;
-
+  const {user}= UserAuth();
   const background = apiConfig.originalImage(
     item.backdrop_path ? item.backdrop_path : item.poster_path
   );
@@ -84,15 +85,15 @@ const HeroSlideItem = (props) => {
           <h2 className="title">{item.title}</h2>
           <div className="overview">{item.overview}</div>
           <div className="btns">
-            <Button>
-              <Link
-                className="property-btn"
-                to="/detail"
-                state={{ item: item, MediaType: "movie" }}
-              >
-                Read More
-              </Link>
-            </Button>
+          {user?(<Button>
+            <Link
+              className="property-btn"
+              to="/detail"
+              state={{ item: item, MediaType: "movie" }}
+            >
+              Read More
+            </Link>
+          </Button>): null}  
           </div>
         </div>
         <div className="hero-slide__item__content__poster">
