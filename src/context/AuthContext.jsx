@@ -7,7 +7,7 @@ import {
   signOut,
   onAuthStateChanged,
 } from "firebase/auth";
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc, collection } from "firebase/firestore";
 
 import { auth, db } from "../firebase/firebase";
 
@@ -16,6 +16,8 @@ const AuthContext = createContext();
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [isAdmin, setIsadmin] = useState(false);
+
   const logOut = () => {
     signOut(auth);
   };
@@ -61,6 +63,7 @@ export const AuthContextProvider = ({ children }) => {
     setIsLoading(true);
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
+
       console.log("User", currentUser);
       setIsLoading(false);
     });
@@ -69,10 +72,30 @@ export const AuthContextProvider = ({ children }) => {
       unsubscribe();
     };
   }, []);
-
+  useEffect(() => {
+    const fetchDoc = async () => {
+      if (user) {
+        const adminRef = doc(db, "admins", user.uid);
+        const adminSnap = await getDoc(adminRef);
+        if (adminSnap.exists) {
+          setIsadmin(true);
+        } else {
+          setIsadmin(false);
+        }
+      }
+    };
+    fetchDoc();
+  }, [user]);
   return (
     <AuthContext.Provider
-      value={{ googleSignIn, createUserDocument, user, logOut, isLoading }}
+      value={{
+        googleSignIn,
+        createUserDocument,
+        user,
+        logOut,
+        isLoading,
+        isAdmin,
+      }}
     >
       {children}
     </AuthContext.Provider>
