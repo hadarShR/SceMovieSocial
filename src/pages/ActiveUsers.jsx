@@ -18,7 +18,7 @@ const ActiveUsers = () => {
     }
   }, [docs]);
   return (
-    <div>
+    <div style={{ padding: "5rem", marginLeft: "10rem" }}>
       <SideBar />
       <MyTable users={users} />
     </div>
