@@ -12,6 +12,7 @@ import { AuthContextProvider } from "./context/AuthContext";
 import PopUp from "./components/PopUp";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import AdminDash from "./pages/AdminDash";
 
 const App = () => {
   return (
@@ -27,6 +28,8 @@ const App = () => {
           <Route path="/aboutus" element={<AboutUs />} />
           <Route path="/search" element={<Search />} />
           <Route path="/test" element={<PopUp />} />
+
+          <Route path="/admin" element={<AdminDash />} />
         </Routes>
         <Footer />
       </AuthContextProvider>

@@ -5,7 +5,7 @@ import { UserAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router";
 
 const Navbar = () => {
-  const { user, logOut, isLoading } = UserAuth();
+  const { user, logOut, isLoading, isAdmin } = UserAuth();
   const navigate = useNavigate();
 
   const handlesSignOut = async () => {
@@ -34,6 +34,9 @@ const Navbar = () => {
         handlesSignOut();
         break;
       case "profile":
+        break;
+      case "admin":
+        navigate("/admin");
         break;
       default:
         break;
@@ -83,6 +86,14 @@ const Navbar = () => {
           </button>
           {isOpen && user && (
             <ul className="dropdown-menu">
+              {isAdmin && (
+                <li>
+                  <button onClick={() => handleOptionClick("admin")}>
+                    Admin
+                  </button>
+                </li>
+              )}
+
               <li>
                 <button onClick={() => handleOptionClick("profile")}>
                   Profile
