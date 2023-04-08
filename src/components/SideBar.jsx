@@ -1,7 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-
+import { UserAuth } from "../context/AuthContext";
+import { Link } from "react-router-dom";
 const SideBar = () => {
+  const { user } = UserAuth();
   return (
     <StyledSection>
       <div
@@ -17,11 +19,36 @@ const SideBar = () => {
           zIndex: 1,
         }}
       >
-        <ul style={{ listStyleType: "none", margin: 0, padding: 0 }}>
-          <li style={{ padding: 16 }}>Dashboard</li>
-          <li style={{ padding: 16 }}>Users</li>
-          <li style={{ padding: 16 }}>Orders</li>
-          <li style={{ padding: 16 }}>Settings</li>
+        <div className="brand">
+          <a href="/">
+            <div className="container">SCE-Movie-Social</div>
+          </a>
+        </div>
+        {user && (
+          <div className="user-avatar">
+            <img
+              src={user.photoURL}
+              alt={user.photoURL}
+              className="avatar-image"
+            />
+            <h2 className="avatar-name">{user.displayName}</h2>
+          </div>
+        )}
+
+        <ul
+          style={{
+            listStyleType: "none",
+            margin: 0,
+            padding: 0,
+            marginTop: "2rem",
+          }}
+        >
+          <Link to="/activeusers">
+            <li style={{ padding: 16 }}>Users</li>
+          </Link>
+          <li style={{ padding: 16 }}>Messages</li>
+          <li style={{ padding: 16 }}>Posts</li>
+          <li style={{ padding: 16 }}>Admins</li>
         </ul>
       </div>
     </StyledSection>
@@ -56,6 +83,42 @@ const StyledSection = styled.section`
 
   .sidebar li.active {
     background-color: #4caf50;
+  }
+  .brand {
+    font-size: 1.09rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    padding-top: 0.5rem;
+
+    .container {
+      cursor: pointer;
+      gap: 0.4rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      transition: 0.1s ease-in-out;
+      color: white;
+      text-decoration: underline;
+      &:hover {
+        color: #023e8a;
+      }
+    }
+  }
+  .user-avatar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .avatar-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+  }
+
+  .avatar-name {
+    font-size: 18px;
+    font-weight: bold;
   }
 `;
 

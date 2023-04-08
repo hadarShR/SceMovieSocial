@@ -221,11 +221,6 @@ const Nav = styled.nav`
     }
   }
 
-  .brand {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-  }
-
   .pages {
     ul {
       display: flex;
@@ -278,6 +273,8 @@ const Nav = styled.nav`
   }
   .brand {
     padding-right: 4rem;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
 
     .container {
       cursor: pointer;
