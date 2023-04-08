@@ -9,17 +9,20 @@ import LoginPage from "./pages/LoginPage";
 import AboutUs from "./pages/AboutUs";
 import Search from "./pages/Search";
 import { AuthContextProvider } from "./context/AuthContext";
-import PopUp from "./components/PopUp";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AdminDash from "./pages/AdminDash";
+import { useLocation } from "react-router-dom";
+import ActiveUsers from "./pages/ActiveUsers";
 
 const App = () => {
+  const location = useLocation();
   return (
     <>
       <ToastContainer />
       <AuthContextProvider>
-        <Navbar />
+        {location.pathname !== "/admin" &&
+          location.pathname !== "/activeusers" && <Navbar />}
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
@@ -27,11 +30,11 @@ const App = () => {
           <Route path="/personDetails" element={<PersonDetail />} />
           <Route path="/aboutus" element={<AboutUs />} />
           <Route path="/search" element={<Search />} />
-          <Route path="/test" element={<PopUp />} />
-
           <Route path="/admin" element={<AdminDash />} />
+          <Route path="/activeusers" element={<ActiveUsers />} />
         </Routes>
-        <Footer />
+        {location.pathname !== "/admin" &&
+          location.pathname !== "/activeusers" && <Footer />}
       </AuthContextProvider>
     </>
   );

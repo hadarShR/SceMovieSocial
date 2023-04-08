@@ -7,7 +7,7 @@ import {
   signOut,
   onAuthStateChanged,
 } from "firebase/auth";
-import { doc, getDoc, setDoc, collection } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 
 import { auth, db } from "../firebase/firebase";
 
