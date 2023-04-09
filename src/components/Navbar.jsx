@@ -75,13 +75,11 @@ const Navbar = () => {
         <div className="dropdown">
           <button className="dropdown-toggle" onClick={toggleDropdown}>
             {isLoading ? (
-              <button>loading</button>
+              <span>loading</span>
             ) : user ? (
-              <button>{user?.displayName}</button>
+              <span>{user?.displayName}</span>
             ) : (
-              <button>
-                <Link to="/login">Sign in</Link>
-              </button>
+              <Link to="/login">Sign in</Link>
             )}
           </button>
           {isOpen && user && (
@@ -150,11 +148,10 @@ const Nav = styled.nav`
   .dropdown-toggle {
     background-color: #333;
     color: #fff;
-    padding: 0.5rem 1rem;
+    padding: 0.7rem 1rem;
     border-radius: 0.5rem;
     border: none;
     margin-top: 1rem;
-    padding: 0.5rem 1rem;
     cursor: pointer;
     margin-right: 24px;
     font-weight: 499;
