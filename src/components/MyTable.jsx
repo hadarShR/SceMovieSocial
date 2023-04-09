@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { Table, Button } from "reactstrap";
 import styled from "styled-components";
+import { OutlineButton } from "../components/Button";
 const MyTable = ({ users }) => {
   const [sortField, setSortField] = useState("name");
   const [sortDirection, setSortDirection] = useState("asc");
@@ -21,9 +22,9 @@ const MyTable = ({ users }) => {
       <Table>
         <thead>
           <tr>
-            <th onClick={() => toggleSort("name")}>Name</th>
+            <th onClick={() => toggleSort("name")}>User-Name</th>
             <th onClick={() => toggleSort("email")}>Email</th>
-            <th onClick={() => toggleSort("role")}>Role</th>
+            <th onClick={() => toggleSort("role")}>Created-At</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -45,12 +46,10 @@ const MyTable = ({ users }) => {
                 <td>{user.email}</td>
                 <td>{user.createdAt.toDate().toLocaleString()}</td>
                 <td>
-                  <Button color="primary" size="sm" className="mr-2">
-                    Edit
-                  </Button>
-                  <Button color="danger" size="sm">
-                    Delete
-                  </Button>
+                  <div className="buttons">
+                    <OutlineButton className="mr-2 ">Block</OutlineButton>
+                    <OutlineButton className="mr-2">Remove</OutlineButton>
+                  </div>
                 </td>
               </tr>
             ))}
@@ -79,7 +78,7 @@ const StyledSection = styled.section`
   }
 
   tbody tr:hover {
-    background-color: #f5f5f5;
+    background-color: gray;
   }
 
   tbody img.avatar-image {
@@ -87,6 +86,9 @@ const StyledSection = styled.section`
     height: 30px;
     border-radius: 50%;
     margin-right: 10px;
+  }
+  .buttons {
+    margin-left: 3rem;
   }
 `;
 export default MyTable;
