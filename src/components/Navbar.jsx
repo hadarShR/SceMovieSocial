@@ -34,6 +34,7 @@ const Navbar = () => {
         handlesSignOut();
         break;
       case "profile":
+        navigate("/userprofile");
         break;
       case "admin":
         navigate("/admin");
