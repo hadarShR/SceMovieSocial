@@ -1,9 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { UserAuth } from "../context/AuthContext";
 import { Link } from "react-router-dom";
-const SideBar = () => {
-  const { user } = UserAuth();
+
+const SideBar = ({ user }) => {
   return (
     <StyledSection>
       <div

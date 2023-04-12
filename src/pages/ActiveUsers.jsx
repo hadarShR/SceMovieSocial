@@ -15,13 +15,13 @@ const ActiveUsers = () => {
   useEffect(() => {
     if (docs) {
       setUsers(docs);
-      console.log(docs);
     }
   }, [docs]);
+
   return (
     <div style={{ padding: "5rem", marginLeft: "10rem" }}>
       <SideBar />
-      <MyTable users={users} />
+      {loading ? "loading..." : <MyTable users={users} />}
     </div>
   );
 };

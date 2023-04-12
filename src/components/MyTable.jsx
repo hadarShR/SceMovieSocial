@@ -1,37 +1,26 @@
 import React from "react";
-import { useState } from "react";
-import { Table, Button } from "reactstrap";
+import { Table } from "reactstrap";
 import styled from "styled-components";
 import { OutlineButton } from "../components/Button";
+
 const MyTable = ({ users }) => {
-  const [sortField, setSortField] = useState("name");
-  const [sortDirection, setSortDirection] = useState("asc");
-
-  const toggleSort = (field) => {
-    if (field === sortField) {
-      setSortDirection(sortDirection === "asc" ? "desc" : "asc");
-    } else {
-      setSortField(field);
-      setSortDirection("asc");
-    }
-  };
-  console.log(users);
-
   return (
     <StyledSection>
       <Table>
         <thead>
           <tr>
-            <th onClick={() => toggleSort("name")}>User-Name</th>
-            <th onClick={() => toggleSort("email")}>Email</th>
-            <th onClick={() => toggleSort("role")}>Created-At</th>
+            <th>#</th>
+            <th>User-Name</th>
+            <th>Email</th>
+            <th>Created-At</th>
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
           {users &&
-            users.map((user) => (
-              <tr key={user.uid}>
+            users.map((user, index) => (
+              <tr key={index}>
+                <td>{index}</td>
                 <td>
                   {user ? (
                     <img
