@@ -1,8 +1,8 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAuth, updateProfile } from "firebase/auth";
+import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { getStorage } from "firebase/storage";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -21,19 +21,4 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
-const storage = getStorage();
-
-export async function upload(file, currentUser, setLoading) {
-  const fileRef = ref(storage, currentUser.uid + ".png");
-  setLoading(true);
-  const snapshot = await uploadBytes(fileRef, file);
-
-  const photoUrl = await getDownloadURL(fileRef);
-  console.log(photoUrl);
-  updateProfile(currentUser, {
-    photoURL: photoUrl,
-  }).catch((error) => console.log(error));
-
-  setLoading(false);
-  alert("uploaded file");
-}
+export const storage = getStorage(app);

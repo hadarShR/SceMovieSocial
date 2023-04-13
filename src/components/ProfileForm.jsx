@@ -7,12 +7,11 @@ import {
   TiSocialLinkedin,
   TiSocialInstagram,
 } from "react-icons/ti";
-import { UserAuth } from "../context/AuthContext";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../firebase/firebase";
+import { toast } from "react-toastify";
 
-const Profile = () => {
-  const { user, isLoading } = UserAuth() || {};
+const Profile = ({ user, userFirestoreDoc }) => {
   const [website, setWebsite] = useState("");
   const [instagram, setInstagram] = useState("");
   const [facebook, setFacebook] = useState("");
@@ -25,8 +24,6 @@ const Profile = () => {
     if (user) {
       const docRef = doc(db, "users", user.uid);
 
-      console.log(docRef);
-
       const docData = {
         website: website,
         instagram: instagram,
@@ -38,11 +35,36 @@ const Profile = () => {
       };
 
       await setDoc(docRef, docData, { merge: true });
-      console.log("user document was updated");
+
+      toast.success("Document updated Successfully!", {
+        position: "bottom-left",
+        autoClose: 4500,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        style: {
+          fontFamily: "Arial",
+          fontSize: "15px",
+          fontWeight: "bold",
+          color: "#4CAF50",
+          borderRadius: "5px",
+          paddingLeft: "10px",
+        },
+      });
     } else {
       console.log("no user to update");
     }
   };
+
+  useEffect(() => {
+    setWebsite(userFirestoreDoc?.website);
+    setInstagram(userFirestoreDoc?.instagram);
+    setFacebook(userFirestoreDoc?.facebook);
+    setLinkedin(userFirestoreDoc?.linkedin);
+    setDegree(userFirestoreDoc?.degree);
+    setDegreeYear(userFirestoreDoc?.degreeYear);
+    setTrack(userFirestoreDoc?.track);
+  }, [userFirestoreDoc]);
 
   return (
     <StyledSection>
@@ -73,6 +95,7 @@ const Profile = () => {
                 <select
                   className="custom-select"
                   onChange={(e) => setDegree(e.target.value)}
+                  value={degree}
                 >
                   <option value="Bachelor's Degree">Bachelor's Degree</option>
                   <option value="Master's Degree">Master's Degree</option>
@@ -85,6 +108,7 @@ const Profile = () => {
                 <select
                   className="custom-select"
                   onChange={(e) => setTrack(e.target.value)}
+                  value={track}
                 >
                   <option value="Academic Preparatory Program">
                     Academic Preparatory Program
@@ -120,6 +144,7 @@ const Profile = () => {
                 <select
                   className="custom-select"
                   onChange={(e) => setDegreeYear(e.target.value)}
+                  value={degreeYear}
                 >
                   <option value="First">1</option>
                   <option value="Second">2</option>
@@ -139,7 +164,7 @@ const Profile = () => {
                   autoFocus
                   type="text"
                   onChange={(e) => setWebsite(e.target.value)}
-                  placeholder={user?.website || "website"}
+                  placeholder={userFirestoreDoc?.website || "website"}
                 />
               </div>
             </div>
@@ -154,7 +179,9 @@ const Profile = () => {
                     autoFocus
                     type="text"
                     onChange={(e) => setFacebook(e.target.value)}
-                    placeholder="http://facebook"
+                    placeholder={
+                      userFirestoreDoc?.facebook || "http://facebook"
+                    }
                   />
                 </div>
               </div>
@@ -168,7 +195,9 @@ const Profile = () => {
                     autoFocus
                     type="text"
                     onChange={(e) => setLinkedin(e.target.value)}
-                    placeholder="http://linkedin"
+                    placeholder={
+                      userFirestoreDoc?.linkedin || "http://linkedin"
+                    }
                   />
                 </div>
               </div>
@@ -182,7 +211,9 @@ const Profile = () => {
                     autoFocus
                     type="text"
                     onChange={(e) => setInstagram(e.target.value)}
-                    placeholder="http://instagram"
+                    placeholder={
+                      userFirestoreDoc?.instagram || "http://instagram"
+                    }
                   />
                 </div>
               </div>
@@ -206,6 +237,58 @@ const Profile = () => {
 };
 
 const StyledSection = styled.section`
+  /* Style for label */
+  label {
+    color: #fff;
+    display: block;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-decoration: underline;
+    text-decoration-color: orange;
+    text-decoration-thickness: 4px;
+    text-underline-offset: 0.4em;
+  }
+  input:focus {
+    outline: none;
+    box-shadow: 0px 4px 4px whitesmoke;
+    border-color: #4267b2;
+  }
+
+  /* Style for input */
+  input,
+  select {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    margin-bottom: 20px;
+    font-size: 11px;
+    color: #333;
+    font-family: inherit;
+    box-sizing: border-box;
+    outline: none;
+    font-weight: bold;
+  }
+
+  /* Style for select */
+  select.custom-select {
+    display: block;
+    width: 50%;
+    height: calc(2.25rem + 2px);
+    padding: 0.375rem 0.75rem;
+    font-size: 1.2rem;
+    line-height: 1.5;
+    color: black;
+    font-weight: bold;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: none;
+    margin-bottom: 20px;
+    font-family: inherit;
+    box-sizing: border-box;
+    outline: none;
+  }
+
   .form {
     width: 100%;
   }
@@ -251,44 +334,32 @@ const StyledSection = styled.section`
     cursor: pointer;
   }
   .form_box_input_box input {
-    width: 90%;
+    width: 70%;
     border: 0;
     background-color: transparent;
-    outline: none;
     color: white;
-    font-size: 1.3rem;
-  }
-  .form_box_input textarea {
-    width: 100%;
-    background-color: transparent;
-    outline: none;
-    border-radius: 1rem;
-    padding: 1rem;
-    color: white;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
   }
   .form_box_input_social {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(0, 1fr);
     gap: 1rem;
   }
   .form_box_btn button {
-    margin-left: 1rem;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px 20px;
+    background-color: #ff8c00;
     border: none;
-    border-radius: 5px;
-    background-color: #0077ff;
-    color: white;
+    color: #fff;
+    padding: 10px 20px;
     font-size: 16px;
-    font-weight: bold;
+    border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
   }
   .form_box_btn {
-    padding-top: 2rem;
+    width: 50%;
+    align-items: center;
+    text-align: center;
+    margin-top: 30px;
+    padding-bottom: 3rem;
   }
   @media screen and (max-width: 35em) {
     .form_box_input_social {
