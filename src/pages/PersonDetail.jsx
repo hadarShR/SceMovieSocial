@@ -11,7 +11,6 @@ const PersonDetail = () => {
   const personId = location.state.item;
   const [loading, setLoading] = useState(false);
   const [person, setPerson] = useState();
-  console.log(personId);
 
   useEffect(() => {
     const getPerson = async () => {
@@ -21,7 +20,6 @@ const PersonDetail = () => {
       if (response) setPerson(response);
       setLoading(false);
     };
-
     getPerson();
   }, [personId]);
 

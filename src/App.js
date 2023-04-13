@@ -16,6 +16,7 @@ import { useLocation } from "react-router-dom";
 import ActiveUsers from "./pages/ActiveUsers";
 import AdminRoute from "./components/AdminRoute";
 import UserProfile from "./pages/UserProfile";
+import NotFound from "./pages/NotFound";
 
 const App = () => {
   const location = useLocation();
@@ -32,11 +33,12 @@ const App = () => {
           <Route path="/personDetails" element={<PersonDetail />} />
           <Route path="/aboutus" element={<AboutUs />} />
           <Route path="/search" element={<Search />} />
+          <Route path="/userprofile" element={<UserProfile />} />
+          <Route path="*" element={<NotFound />} />
           <Route element={<AdminRoute />}>
             <Route path="/admin" element={<AdminDash />} />
             <Route path="/activeusers" element={<ActiveUsers />} />
           </Route>
-          <Route path="/userprofile" element={<UserProfile />} />
         </Routes>
         {location.pathname !== "/admin" &&
           location.pathname !== "/activeusers" && <Footer />}

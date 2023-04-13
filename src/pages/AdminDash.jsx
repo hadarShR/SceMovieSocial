@@ -1,5 +1,5 @@
 import React from "react";
-import Sidebar from "../components/SideBar";
+import SideBar from "../components/SideBar";
 import { UserAuth } from "../context/AuthContext";
 
 const AdminDash = () => {
@@ -7,7 +7,7 @@ const AdminDash = () => {
 
   return (
     <div className="admin-dashboard">
-      <Sidebar user={user} />
+      <SideBar user={user} />
     </div>
   );
 };

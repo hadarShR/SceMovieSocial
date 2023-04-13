@@ -1,18 +1,14 @@
 import React, { useState, useEffect } from "react";
 import Button from "../components/Button";
 import { Link } from "react-router-dom";
-
 import { A11y, Autoplay, Keyboard, Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-
 import apiConfig from "../api/apiConfig";
-
 import "swiper/swiper-bundle.css";
 import "../scss/hero-slide.scss";
-
 import { getMediaList } from "../api/axiosClient";
 import GlobalLoading from "./GlobalLoading";
-import {UserAuth} from "../context/AuthContext";
+import { UserAuth } from "../context/AuthContext";
 
 const HeroSlide = () => {
   const [popularMovies, setPopularMovies] = useState([]);
@@ -70,7 +66,7 @@ const HeroSlide = () => {
 
 const HeroSlideItem = (props) => {
   const item = props.item;
-  const {user}= UserAuth();
+  const { user } = UserAuth();
   const background = apiConfig.originalImage(
     item.backdrop_path ? item.backdrop_path : item.poster_path
   );
@@ -85,15 +81,17 @@ const HeroSlideItem = (props) => {
           <h2 className="title">{item.title}</h2>
           <div className="overview">{item.overview}</div>
           <div className="btns">
-          {user?(<Button>
-            <Link
-              className="property-btn"
-              to="/detail"
-              state={{ item: item, MediaType: "movie" }}
-            >
-              Read More
-            </Link>
-          </Button>): null}  
+            {user ? (
+              <Button>
+                <Link
+                  className="property-btn"
+                  to="/detail"
+                  state={{ item: item, MediaType: "movie" }}
+                >
+                  Read More
+                </Link>
+              </Button>
+            ) : null}
           </div>
         </div>
         <div className="hero-slide__item__content__poster">

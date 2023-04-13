@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-
 import apiConfig from "../api/apiConfig";
 import { getDetails, getImages } from "../api/axiosClient";
 import "../scss/detail.scss";
@@ -12,14 +11,19 @@ import PosterSlide from "../components/PosterSlide";
 import GlobalLoading from "../components/GlobalLoading";
 
 const Detail = () => {
-  const location = useLocation();
-  const item = location.state.item;
-  const MediaType = location.state.MediaType;
+  const { item, MediaType } = useLocation().state; //getting props
   const [loading, setLoading] = useState(false);
   const [detail, setDetail] = useState(null);
   const [images, setImages] = useState(null);
   const [runtime, setRuntime] = useState("");
   const [release_date, setReleaseDate] = useState("");
+
+  //memo
+  const CastSlideMemo = React.memo(CastSlide);
+  const VideoSlideMemo = React.memo(VideoSlide);
+  const MovieSlideMemo = React.memo(MovieSlide);
+  const BackdropSlideMemo = React.memo(BackdropSlide);
+  const PosterSlideMemo = React.memo(PosterSlide);
 
   useEffect(() => {
     const getDetail = async () => {
@@ -107,7 +111,7 @@ const Detail = () => {
                         <h2>CAST</h2>
                       </div>
                     </div>
-                    <CastSlide type={MediaType} id={item.id} />
+                    <CastSlideMemo type={MediaType} id={item.id} />
                   </div>
                 </div>
               </div>
@@ -124,7 +128,7 @@ const Detail = () => {
                   >
                     <h2>VIDEOS</h2>
                   </div>
-                  <VideoSlide type={MediaType} id={item.id} />
+                  <VideoSlideMemo type={MediaType} id={item.id} />
                 </div>
 
                 {/* media backdrop */}
@@ -139,7 +143,7 @@ const Detail = () => {
                 >
                   <h2>BACKDROPS</h2>
                 </div>
-                {images && images.backdrops.length > 0 && (
+                {images?.backdrops?.length > 0 && (
                   <div
                     header="backdrops"
                     style={{
@@ -148,9 +152,10 @@ const Detail = () => {
                       paddingLeft: "3rem",
                     }}
                   >
-                    <BackdropSlide backdrops={images.backdrops} />
+                    <BackdropSlideMemo backdrops={images.backdrops} />
                   </div>
                 )}
+
                 {/* media backdrop */}
 
                 {/* media posters */}
@@ -165,7 +170,7 @@ const Detail = () => {
                 >
                   <h2>POSTERS</h2>
                 </div>
-                {images && images.posters.length > 0 && (
+                {images?.posters?.length > 0 && (
                   <div
                     header="posters"
                     style={{
@@ -174,7 +179,7 @@ const Detail = () => {
                       paddingLeft: "3rem",
                     }}
                   >
-                    <PosterSlide posters={images.posters} />
+                    <PosterSlideMemo posters={images.posters} />
                   </div>
                 )}
                 {/* media posters */}
@@ -192,7 +197,7 @@ const Detail = () => {
                   >
                     <h2>SIMILAR</h2>
                   </div>
-                  <MovieSlide type={MediaType} id={item.id} />
+                  <MovieSlideMemo type={MediaType} id={item.id} />
                 </div>
               </div>
             </>

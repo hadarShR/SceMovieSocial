@@ -10,7 +10,7 @@ import { useEffect } from "react";
 import { toast } from "react-toastify";
 
 const LoginPage = () => {
-  const { googleSignIn, createUserDocument, user } = UserAuth();
+  const { googleSignIn, createUserDocument, user } = UserAuth() ?? {};
 
   const navigate = useNavigate();
 
@@ -22,17 +22,36 @@ const LoginPage = () => {
       if (user) {
         toast.success("You have successfully signed in!", {
           position: "bottom-left",
-          autoClose: 3000,
+          autoClose: 4100,
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
-          toastId: "custom_success",
-          bodyClassName: "toast-body",
-          progressClassName: "toast-progress",
-          className: "toast-custom",
+          style: {
+            fontFamily: "Arial",
+            fontSize: "15px",
+            fontWeight: "bold",
+            color: "#4CAF50",
+            borderRadius: "5px",
+            paddingLeft: "10px",
+          },
         });
       }
     } catch (error) {
+      toast.error(error, {
+        position: "bottom-left",
+        autoClose: 4500,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        style: {
+          fontFamily: "Arial",
+          fontSize: "15px",
+          fontWeight: "bold",
+          color: "red",
+          borderRadius: "5px",
+          padding: "10px",
+        },
+      });
       console.log(error);
     }
   };

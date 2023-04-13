@@ -1,19 +1,16 @@
 import React from "react";
-
 import "../scss/movie-card.scss";
-
 import { Link } from "react-router-dom";
-
 import Button from "./Button";
 import apiConfig from "../api/apiConfig";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import photoComingSoon from "../assets/photo-coming-soon.jpg";
-import {UserAuth} from "../context/AuthContext";
+import { UserAuth } from "../context/AuthContext";
 
 const MovieCard = (props) => {
   const item = props.item;
   const type = props.MediaType;
-  const {user} = UserAuth();
+  const { user } = UserAuth() ?? {};
 
   const bg = apiConfig.w500Image(item.poster_path || item.backdrop_path);
 
@@ -29,11 +26,13 @@ const MovieCard = (props) => {
         }}
       >
         <Link to="/detail" state={{ item: item, MediaType: type }}>
-        {user ? (<Button>
-          <div style={{ scale: "1.4", paddingTop: "3px" }}>
-            <PlayArrowIcon />
-          </div>
-        </Button>) : null}   
+          {user ? (
+            <Button>
+              <div style={{ scale: "1.4", paddingTop: "3px" }}>
+                <PlayArrowIcon />
+              </div>
+            </Button>
+          ) : null}
         </Link>
       </div>
       <h3>{item.title || item.name}</h3>
