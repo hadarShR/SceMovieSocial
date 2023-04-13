@@ -1,17 +1,10 @@
-import { Route, Navigate } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import { UserAuth } from "../context/AuthContext";
 
-const AdminRoute = ({ element: Component, ...rest }) => {
-  const { user } = UserAuth();
+const AdminRoute = () => {
+  const { user, isAdmin } = UserAuth();
 
-  return (
-    <Route
-      {...rest}
-      element={
-        user && user.isAdmin ? <Component /> : <Navigate to="/" replace />
-      }
-    />
-  );
+  return isAdmin && user ? <Outlet /> : <Navigate to="/" replace />;
 };
 
 export default AdminRoute;

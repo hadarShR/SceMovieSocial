@@ -24,8 +24,8 @@ const MyTable = ({ users }) => {
                 <td>
                   {user ? (
                     <img
-                      src={user.photoURL}
-                      alt={user.photoURL}
+                      src={user?.photoURL}
+                      alt={index}
                       className="avatar-image"
                     />
                   ) : null}

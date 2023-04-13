@@ -14,6 +14,7 @@ import "react-toastify/dist/ReactToastify.css";
 import AdminDash from "./pages/AdminDash";
 import { useLocation } from "react-router-dom";
 import ActiveUsers from "./pages/ActiveUsers";
+import AdminRoute from "./components/AdminRoute";
 import UserProfile from "./pages/UserProfile";
 
 const App = () => {
@@ -31,8 +32,10 @@ const App = () => {
           <Route path="/personDetails" element={<PersonDetail />} />
           <Route path="/aboutus" element={<AboutUs />} />
           <Route path="/search" element={<Search />} />
-          <Route path="/admin" element={<AdminDash />} />
-          <Route path="/activeusers" element={<ActiveUsers />} />
+          <Route element={<AdminRoute />}>
+            <Route path="/admin" element={<AdminDash />} />
+            <Route path="/activeusers" element={<ActiveUsers />} />
+          </Route>
           <Route path="/userprofile" element={<UserProfile />} />
         </Routes>
         {location.pathname !== "/admin" &&

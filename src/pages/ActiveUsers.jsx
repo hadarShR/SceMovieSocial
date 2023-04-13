@@ -5,8 +5,10 @@ import { collection } from "firebase/firestore";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { db } from "../firebase/firebase";
 import SideBar from "../components/SideBar";
+import { UserAuth } from "../context/AuthContext";
 
 const ActiveUsers = () => {
+  const { user } = UserAuth() ?? {};
   //getting users (Firestore) documents
   const query = collection(db, "users");
   const [docs, loading, error] = useCollectionData(query);
@@ -20,7 +22,7 @@ const ActiveUsers = () => {
 
   return (
     <div style={{ padding: "5rem", marginLeft: "10rem" }}>
-      <SideBar />
+      <SideBar user={user} />
       {loading ? "loading..." : <MyTable users={users} />}
     </div>
   );
