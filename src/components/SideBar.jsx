@@ -26,8 +26,8 @@ const SideBar = ({ user }) => {
         {user && (
           <div className="user-avatar">
             <img
-              src={user.photoURL}
-              alt={user.photoURL}
+              src={user?.photoURL}
+              alt={user?.photoURL}
               className="avatar-image"
             />
             <h2 className="avatar-name">{user.displayName}</h2>
