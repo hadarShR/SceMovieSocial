@@ -8,13 +8,9 @@ import { UserAuth } from "../context/AuthContext";
 import PopUp from "../components/PopUp";
 
 const HomePage = () => {
-  const { user, isLoading } = UserAuth();
+  const { user, isLoading } = UserAuth() ?? {};
   const [PopUpTime, setPopUpTime] = useState(true);
   const [timeoutId, setTimeoutId] = useState(null);
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
 
   useEffect(() => {
     const id = setTimeout(() => {
@@ -47,7 +43,11 @@ const HomePage = () => {
               <OutlineButton className="small">View more</OutlineButton>
             </Link>
           </div>
-          <HomeMediaSlide type={"movie"} MediaName={"upcoming"} />
+          <HomeMediaSlide
+            key="upcoming-movies"
+            type="movie"
+            MediaName="upcoming"
+          />
         </div>
 
         <div className="section mb-3">
@@ -65,7 +65,11 @@ const HomePage = () => {
               <OutlineButton className="small">View more</OutlineButton>
             </Link>
           </div>
-          <HomeMediaSlide type={"movie"} MediaName={"top_rated"} />
+          <HomeMediaSlide
+            key="top-rated-movies"
+            type="movie"
+            MediaName="top_rated"
+          />
         </div>
 
         <div className="section mb-3">
@@ -83,7 +87,7 @@ const HomePage = () => {
               <OutlineButton className="small">View more</OutlineButton>
             </Link>
           </div>
-          <HomeMediaSlide type={"tv"} MediaName={"popular"} />
+          <HomeMediaSlide key="trending-tv" type="tv" MediaName="popular" />
         </div>
 
         <div className="section mb-3">
@@ -101,7 +105,7 @@ const HomePage = () => {
               <OutlineButton className="small">View more</OutlineButton>
             </Link>
           </div>
-          <HomeMediaSlide type={"tv"} MediaName={"top_rated"} />
+          <HomeMediaSlide key="top-rated-tv" type="tv" MediaName="top_rated" />
         </div>
       </div>
     </>

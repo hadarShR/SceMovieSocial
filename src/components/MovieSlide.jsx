@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { SwiperSlide, Swiper } from "swiper/react";
 import { getSimilar } from "../api/axiosClient";
-
 import MovieCard from "./MovieCard";
-
 import "../scss/movie-slide.scss";
 
 const MovieSlide = (props) => {

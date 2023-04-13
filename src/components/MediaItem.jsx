@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Button from "./Button";
 import photoComingSoon from "../assets/photo-coming-soon.jpg";
-
 import apiConfig from "../api/apiConfig";
 
 const MediaItem = ({ media, mediaType }) => {

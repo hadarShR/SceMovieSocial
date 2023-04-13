@@ -1,13 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
-
-import { useParams } from "react-router";
 import { getVideo } from "../api/axiosClient";
 import { A11y, Keyboard, Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 const VideoSlide = (props) => {
-  const { category } = useParams();
-
   const [videos, setVideos] = useState([]);
 
   useEffect(() => {
@@ -16,7 +12,7 @@ const VideoSlide = (props) => {
       setVideos(res.slice(0, 5));
     };
     getVideos();
-  }, [category, props.id, props.type]);
+  }, [props.id, props.type]);
 
   return (
     <>

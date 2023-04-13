@@ -5,10 +5,8 @@ import {
   signInWithPopup,
   signInWithRedirect,
   signOut,
-  onAuthStateChanged,
 } from "firebase/auth";
 import { doc, getDoc, setDoc } from "firebase/firestore";
-
 import { auth, db } from "../firebase/firebase";
 
 const AuthContext = createContext();
@@ -17,6 +15,7 @@ export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isAdmin, setIsadmin] = useState(false);
+  const [userFirestoreDoc, setUserFirestoreDoc] = useState(null);
 
   const logOut = () => {
     signOut(auth);
@@ -61,9 +60,8 @@ export const AuthContextProvider = ({ children }) => {
 
   useEffect(() => {
     setIsLoading(true);
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+    const unsubscribe = auth.onAuthStateChanged((currentUser) => {
       setUser(currentUser);
-
       console.log("User", currentUser);
       setIsLoading(false);
     });
@@ -72,8 +70,9 @@ export const AuthContextProvider = ({ children }) => {
       unsubscribe();
     };
   }, []);
+
   useEffect(() => {
-    const fetchDoc = async () => {
+    const fetchAdminDoc = async () => {
       if (user) {
         const adminRef = doc(db, "admins", user.uid);
         const adminSnap = await getDoc(adminRef);
@@ -84,8 +83,30 @@ export const AuthContextProvider = ({ children }) => {
         }
       }
     };
-    fetchDoc();
+    fetchAdminDoc();
+
+    const GetUserFirestoreDoc = () => {
+      if (user) {
+        const docRef = doc(db, "users", user.uid);
+
+        getDoc(docRef)
+          .then((doc) => {
+            if (doc.exists()) {
+              const userObj = doc.data();
+              setUserFirestoreDoc(userObj);
+              console.log("User Firestore:", userObj);
+            } else {
+              console.log("No user object found");
+            }
+          })
+          .catch((error) => {
+            console.log("Error getting user object:", error);
+          });
+      }
+    };
+    GetUserFirestoreDoc();
   }, [user]);
+
   return (
     <AuthContext.Provider
       value={{
@@ -95,6 +116,7 @@ export const AuthContextProvider = ({ children }) => {
         logOut,
         isLoading,
         isAdmin,
+        userFirestoreDoc,
       }}
     >
       {children}

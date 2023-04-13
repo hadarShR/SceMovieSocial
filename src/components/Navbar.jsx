@@ -5,20 +5,19 @@ import { UserAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router";
 
 const Navbar = () => {
-  const { user, logOut, isLoading, isAdmin } = UserAuth();
+  const { user, logOut, isLoading, isAdmin } = UserAuth() ?? {};
   const navigate = useNavigate();
+  const [isOpen, setIsOpen] = useState(false);
 
   const handlesSignOut = async () => {
     try {
       await logOut();
 
-      navigate("/", { state: { SignOut: true } });
+      navigate("/");
     } catch (error) {
       console.log(error);
     }
   };
-
-  const [isOpen, setIsOpen] = useState(false);
 
   const toggleDropdown = () => {
     if (user) {
@@ -201,7 +200,6 @@ const Nav = styled.nav`
   }
 
   .dropdown-menu button:hover {
-    background-color: #fsadaa;
     color: white;
   }
 
