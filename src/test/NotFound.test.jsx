@@ -13,6 +13,11 @@ describe("NotFound", () => {
     wrapper = shallow(<NotFound />);
   });
 
+  it("should render the component without crashing", () => {
+    const wrapper = shallow(<NotFound />);
+    expect(wrapper).toHaveLength(1);
+  });
+
   it("should render a title", () => {
     const title = wrapper.find(".not-found-title");
     expect(title).toHaveLength(1);
