@@ -3,7 +3,7 @@ import { shallow, configure } from "enzyme";
 import CastSlide from "../components/CastSlide";
 import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
 import "jest-extended";
-import { Swiper, SwiperSlide } from "swiper/react";
+import { Swiper } from "swiper/react";
 
 
 configure({ adapter: new Adapter() });
