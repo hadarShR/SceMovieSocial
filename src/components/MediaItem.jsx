@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Button from "./Button";
 import photoComingSoon from "../assets/photo-coming-soon.jpg";
 import apiConfig from "../api/apiConfig";
+import { PlayArrow } from '@mui/icons-material';
 
 const MediaItem = ({ media, mediaType }) => {
   const [title, setTitle] = useState("");
