@@ -22,6 +22,11 @@ describe("PopUp", () => {
     expect(message).toContain("Welcome to SCE-MOVIE-SOCIAL!");
   });
 
+  it("should render the component without crashing", () => {
+    const wrapper = shallow(<PopUp />);
+    expect(wrapper).toHaveLength(1);
+  });
+
   it("should render a message about signing up", () => {
     const message = wrapper.find(".content").text();
     expect(message).toContain("Sign UP now and you can enjoy detailed and rich content of movies and series.");
