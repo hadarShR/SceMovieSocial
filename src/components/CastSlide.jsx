@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { getCast } from "../api/axiosClient";
 import apiConfig from "../api/apiConfig";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -9,13 +9,15 @@ import NoImage from "../assets/No-Image-Placeholder.svg.png";
 const CastSlide = (props) => {
   const [casts, setCasts] = useState([]);
 
+  const memoizedGetCast = useMemo(() => getCast, []);
+
   useEffect(() => {
     const getCredits = async () => {
-      const res = await getCast(props.type, props.id);
+      const res = await memoizedGetCast(props.type, props.id);
       setCasts(res);
     };
     getCredits();
-  }, [props]);
+  }, [props, memoizedGetCast]);
 
   return (
     <div className="casts">
@@ -30,34 +32,33 @@ const CastSlide = (props) => {
         grabCursor={true}
         style={{ width: "750px" }}
       >
-        {casts &&
-          casts.map((item, i) => (
-            <SwiperSlide key={i}>
-              <div key={i} className="casts__item">
-                <Link to="/personDetails" state={{ item: item.id }}>
-                  {item.profile_path ? (
-                    <div
-                      className="casts__item__img"
-                      style={{
-                        backgroundImage: `url(${apiConfig.w500Image(
-                          item.profile_path
-                        )})`,
-                      }}
-                    ></div>
-                  ) : (
-                    <div
-                      className="casts__item__img"
-                      style={{
-                        backgroundImage: `url(${NoImage})`,
-                      }}
-                    ></div>
-                  )}
-                </Link>
+        {casts?.map((item, i) => (
+          <SwiperSlide key={i}>
+            <div key={i} className="casts__item">
+              <Link to="/personDetails" state={{ item: item.id }}>
+                {item.profile_path ? (
+                  <div
+                    className="casts__item__img"
+                    style={{
+                      backgroundImage: `url(${apiConfig.w500Image(
+                        item.profile_path
+                      )})`,
+                    }}
+                  ></div>
+                ) : (
+                  <div
+                    className="casts__item__img"
+                    style={{
+                      backgroundImage: `url(${NoImage})`,
+                    }}
+                  ></div>
+                )}
+              </Link>
 
-                <p className="casts__item__name">{item.name}</p>
-              </div>
-            </SwiperSlide>
-          ))}
+              <p className="casts__item__name">{item.name}</p>
+            </div>
+          </SwiperSlide>
+        ))}
       </Swiper>
     </div>
   );
