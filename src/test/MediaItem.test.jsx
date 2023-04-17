@@ -3,8 +3,6 @@ import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
 import React from "react";
 import MediaItem from "../components/MediaItem";
 import "jest-extended";
-import Button from "../components/Button";
-import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import { Link } from "react-router-dom";
 
 configure({ adapter: new Adapter() });
