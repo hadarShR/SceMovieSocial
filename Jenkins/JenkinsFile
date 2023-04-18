@@ -1,38 +1,28 @@
 pipeline {
-    agent any
+    agent none
     stages {
-        stage('Checkout') {
+        stage('Install Dependencies') {
+            agent {
+                    docker {
+                         image 'node:sce-mocie-social'
+                         args '-p 3000:3001 -u root'
+                    }
+            }
             steps {
-                checkout scm
+                   sh "yarn install"
             }
         }
-        stage('Install Yarn') {
-            steps {
-                sh 'curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -'
-                sh 'echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list'
-                sh 'apt-get update && apt-get install yarn'
-            }
-        }
-        stage('Build') {
-            steps {
-                sh 'yarn install'
-                sh 'yarn build'
-            }
-        }
-        stage('Dockerize') {
-            steps {
-                sh 'docker build -t sce-movie-social .'
-            }
-        }
-        stage('Test') {
-            steps {
-                sh 'yarn test'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                sh 'docker run -p 80:80 sce-movie-social'
-            }
+        stage('test') {
+        
+                agent {
+                        docker {
+                            image 'node:sce-mocie-social'
+                            args '-p 3000:3001 -u root'
+                        }
+                }
+                steps {
+                    sh "yarn test"
+                }
         }
     }
 }
