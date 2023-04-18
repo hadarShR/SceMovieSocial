@@ -8,30 +8,30 @@ pipeline {
         }
         stage('Install Yarn') {
             steps {
-                bat 'curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -'
-                bat 'echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list'
-                bat 'apt-get update && apt-get install yarn'
+                sh 'curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -'
+                sh 'echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list'
+                sh 'apt-get update && apt-get install yarn'
             }
         }
         stage('Build') {
             steps {
-                bat 'yarn install'
-                bat 'yarn build'
+                sh 'yarn install'
+                sh 'yarn build'
             }
         }
         stage('Dockerize') {
             steps {
-                bat 'docker build -t sce-movie-social .'
+                sh 'docker build -t sce-movie-social .'
             }
         }
         stage('Test') {
             steps {
-                bat 'yarn test'
+                sh 'yarn test'
             }
         }
         stage('Deploy') {
             steps {
-                bat 'docker run -p 80:80 sce-movie-social'
+                sh 'docker run -p 80:80 sce-movie-social'
             }
         }
     }
