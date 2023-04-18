@@ -1,6 +1,6 @@
 import React from "react";
 import { shallow, configure } from "enzyme";
-import PopUp from "../components/popup";
+import PopUp from "../components/PopUp";
 import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
 import "jest-extended";
 
@@ -29,12 +29,16 @@ describe("PopUp", () => {
 
   it("should render a message about signing up", () => {
     const message = wrapper.find(".content").text();
-    expect(message).toContain("Sign UP now and you can enjoy detailed and rich content of movies and series.");
+    expect(message).toContain(
+      "Sign UP now and you can enjoy detailed and rich content of movies and series."
+    );
   });
 
   it("should render a message about meeting other students", () => {
     const message = wrapper.find(".content").text();
-    expect(message).toContain("And in addition, you will be able to meet other students with With a love for cinema like you.");
+    expect(message).toContain(
+      "And in addition, you will be able to meet other students with With a love for cinema like you."
+    );
   });
 
   it("should have a 'NO, thanks' button that closes the popup", () => {
@@ -43,5 +47,4 @@ describe("PopUp", () => {
     button.simulate("click");
     expect(wrapper.find(".popup")).toHaveLength(0);
   });
-
 });
