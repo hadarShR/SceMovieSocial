@@ -1,0 +1,31 @@
+pipeline {
+    agent any
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+        stage('Build') {
+            steps {
+                bat 'yarn install'
+                bat 'yarn build'
+            }
+        }
+        stage('Dockerize') {
+            steps {
+                bat 'docker build -t sce-movie-social .'
+            }
+        }
+        stage('Test') {
+            steps {
+                bat 'yarn test'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                bat 'docker run -p 80:80 sce-movie-social'
+            }
+        }
+    }
+}
