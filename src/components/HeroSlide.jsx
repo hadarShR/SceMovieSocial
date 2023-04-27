@@ -66,7 +66,7 @@ const HeroSlide = () => {
 
 const HeroSlideItem = (props) => {
   const item = props.item;
-  const { user } = UserAuth();
+  const { user } = UserAuth() ?? {};
   const background = apiConfig.originalImage(
     item.backdrop_path ? item.backdrop_path : item.poster_path
   );

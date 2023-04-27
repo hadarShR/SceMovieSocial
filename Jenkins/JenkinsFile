@@ -1,0 +1,25 @@
+pipeline {
+    agent {
+        docker {
+            image 'michaelmagic97/sce-movie-social:v1.0'
+            args '-p 3000:3001 -u root'
+        }
+    }
+    stages {
+        stage('Install Dependencies') {
+            steps {
+                sh 'yarn install'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'yarn test'
+            }
+        }
+        stage('Build') {
+            steps {
+                sh 'yarn build'
+            }
+        }
+    }
+}
