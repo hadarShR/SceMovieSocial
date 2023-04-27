@@ -49,6 +49,7 @@ export const AuthContextProvider = ({ children }) => {
           email,
           createdAt,
           photoURL,
+          uid: userAuth.uid, // Add the UID as a property of the document
         });
       } catch (error) {
         console.log("error creating the user", error.message);
