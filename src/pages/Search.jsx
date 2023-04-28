@@ -6,7 +6,7 @@ import MediaItem from "../components/MediaItem.jsx";
 
 const Search = () => {
   const [media, setMedia] = useState(() => {
-    const storedMedia = localStorage.getItem("media");
+    const storedMedia = localStorage.getItem("SearchMedia");
     return storedMedia ? JSON.parse(storedMedia) : [];
   });
   const [search, setSearch] = useState(() => {
@@ -33,6 +33,7 @@ const Search = () => {
   }
 
   const mediaTypeChange = (type) => {
+    setPage(1);
     setmediaType(type);
   };
 
@@ -45,7 +46,7 @@ const Search = () => {
       setMedia([]);
       setPage(1);
       setTotalPages(1);
-      localStorage.removeItem("media");
+      localStorage.removeItem("SearchMedia");
       localStorage.removeItem("page");
       localStorage.removeItem("totalPages");
       localStorage.removeItem("search");
@@ -53,7 +54,7 @@ const Search = () => {
       const Response = await SearchMedia(mediaType, search, pageNum);
       setMedia(Response.results);
       setTotalPages(Response.total_pages);
-      localStorage.setItem("media", JSON.stringify(Response.results));
+      localStorage.setItem("SearchMedia", JSON.stringify(Response.results));
       localStorage.setItem("page", pageNum);
       localStorage.setItem("totalPages", Response.total_pages);
       localStorage.setItem("search", search);
@@ -63,7 +64,7 @@ const Search = () => {
   useEffect(() => {
     handleSearch(null, page);
     localStorage.setItem("mediaType", mediaType);
-    setPage(1);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mediaType]);
 
