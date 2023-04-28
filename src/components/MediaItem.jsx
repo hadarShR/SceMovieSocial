@@ -4,11 +4,13 @@ import { Link } from "react-router-dom";
 import Button from "./Button";
 import photoComingSoon from "../assets/photo-coming-soon.jpg";
 import apiConfig from "../api/apiConfig";
+import { UserAuth } from "../context/AuthContext";
 
 const MediaItem = ({ media, mediaType }) => {
   const [title, setTitle] = useState("");
   const [posterPath, setPosterPath] = useState("");
   const [releaseDate, setReleaseDate] = useState(null);
+  const { user } = UserAuth() ?? {};
 
   useEffect(() => {
     setTitle(media.title || media.name || media.mediaTitle);
@@ -58,11 +60,15 @@ const MediaItem = ({ media, mediaType }) => {
                 MediaType: mediaType,
               }}
             >
-              <Button>
-                <div style={{ scale: "1.4", paddingTop: "3px" }}>
-                  <PlayArrowIcon />
-                </div>
-              </Button>
+              {user ? (
+                <Button>
+                  <div style={{ scale: "1.4", paddingTop: "3px" }}>
+                    <PlayArrowIcon />
+                  </div>
+                </Button>
+              ) : (
+                <> </>
+              )}
             </Link>
             <h2>{releaseDate ? "(" + releaseDate + ")" : ""}</h2>
           </div>
