@@ -12,7 +12,7 @@ const Navbar = () => {
   const handlesSignOut = async () => {
     try {
       await logOut();
-
+      localStorage.removeItem("isAdmin");
       navigate("/");
     } catch (error) {
       console.log(error);
@@ -37,6 +37,9 @@ const Navbar = () => {
         break;
       case "admin":
         navigate("/admin");
+        break;
+      case "favorites":
+        navigate("/favorites");
         break;
       default:
         break;
@@ -91,15 +94,14 @@ const Navbar = () => {
                   </button>
                 </li>
               )}
-
               <li>
                 <button onClick={() => handleOptionClick("profile")}>
                   Profile
                 </button>
               </li>
               <li>
-                <button onClick={() => handleOptionClick("profile")}>
-                  favourites
+                <button onClick={() => handleOptionClick("favorites")}>
+                  Favorites
                 </button>
               </li>
               <li>

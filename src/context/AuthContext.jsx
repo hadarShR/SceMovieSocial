@@ -77,9 +77,12 @@ export const AuthContextProvider = ({ children }) => {
       if (user) {
         const adminRef = doc(db, "admins", user.uid);
         const adminSnap = await getDoc(adminRef);
+
         if (adminSnap.exists()) {
+          localStorage.setItem("isAdmin", true);
           setIsadmin(true);
         } else {
+          localStorage.setItem("isAdmin", false);
           setIsadmin(false);
         }
       }
