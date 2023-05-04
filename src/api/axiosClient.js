@@ -22,6 +22,17 @@ export const getMediaList = async (MediaType, MediaName) => {
   }
 };
 
+export const getMediaListByPage = async (MediaType, MediaName, page) => {
+  try {
+    const response = await api.get("/" + MediaType + "/" + MediaName, {
+      params: { page: page },
+    });
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 export const getDetails = async (type, id) => {
   try {
     const response = await api.get("/" + type + "/" + id);
