@@ -17,6 +17,7 @@ import ActiveUsers from "./pages/ActiveUsers";
 import AdminRoute from "./components/AdminRoute";
 import UserProfile from "./pages/UserProfile";
 import NotFound from "./pages/NotFound";
+import AdminMessages from "./pages/AdminMessages";
 
 const App = () => {
   const location = useLocation();
@@ -25,7 +26,8 @@ const App = () => {
       <ToastContainer />
       <AuthContextProvider>
         {location.pathname !== "/admin" &&
-          location.pathname !== "/activeusers" && <Navbar />}
+          location.pathname !== "/activeusers" &&
+          location.pathname !== "/adminMessages" && <Navbar />}
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
@@ -38,10 +40,12 @@ const App = () => {
           <Route element={<AdminRoute />}>
             <Route path="/admin" element={<AdminDash />} />
             <Route path="/activeusers" element={<ActiveUsers />} />
+            <Route path="/adminMessages" element={<AdminMessages />} />
           </Route>
         </Routes>
         {location.pathname !== "/admin" &&
-          location.pathname !== "/activeusers" && <Footer />}
+          location.pathname !== "/activeusers" &&
+          location.pathname !== "/adminMessages" && <Footer />}
       </AuthContextProvider>
     </>
   );
