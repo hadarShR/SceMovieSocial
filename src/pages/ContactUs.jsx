@@ -1,10 +1,21 @@
-import React, { useState } from "react";
+/* eslint-disable no-unused-vars */
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { doc, setDoc} from "firebase/firestore";
+import { db } from "../firebase/firebase";
+import { toast } from "react-toastify";
+import { v4 as uuidv4 } from "uuid";
 
 const ContactUs = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [emailError, setEmailError] = useState(false);
+  const [fullName, setFullName] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -14,15 +25,90 @@ const ContactUs = () => {
     setMessage(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleFullNameChange = (event) => {
+    setFullName(event.target.value);
+  };
+
+  const resetFields = () => {
+    setEmail("");
+    setMessage("");
+    setFullName("");
+  };
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    if (email === "") {
-      setEmailError(true);
-    } else {
-      console.log("Email:", email);
-      console.log("Message:", message);
-      // send message code here
+    if (isLoading) {
+      return;
+    } else if (email === "" || fullName === "" || message === "") {
+      toast.error("A field cannot be empty!", {
+        position: "bottom-left",
+        autoClose: 3900,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        style: {
+          fontFamily: "Arial",
+          fontSize: "17px",
+          fontWeight: "bold",
+          color: "red",
+          borderRadius: "5px",
+          padding: "10px",
+        },
+      });
+      return;
+    } else if (message.length < 15) {
+      toast.error("A message must be at least 15 characters long!", {
+        position: "bottom-left",
+        autoClose: 3900,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        style: {
+          fontFamily: "Arial",
+          fontSize: "17px",
+          fontWeight: "bold",
+          color: "red",
+          borderRadius: "5px",
+          padding: "10px",
+        },
+      });
+      return;
     }
+
+    setIsLoading(true);
+    const date = new Date();
+
+    const randomId = uuidv4();
+    const messageDocRef = doc(db, `admin messages/${randomId}`);
+
+    const docData = {
+      displayName: fullName,
+      id: randomId,
+      message: message,
+      email: email,
+      createdAt: date,
+    };
+
+    await setDoc(messageDocRef, docData, { merge: true });
+
+    toast.success("Your message have been sent !", {
+      position: "bottom-left",
+      autoClose: 3900,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      style: {
+        fontFamily: "Arial",
+        fontSize: "17px",
+        fontWeight: "bold",
+        color: "#4CAF50",
+        borderRadius: "5px",
+        paddingLeft: "10px",
+      },
+    });
+
+    setIsLoading(false);
+    resetFields();
   };
 
   return (
@@ -30,8 +116,8 @@ const ContactUs = () => {
     <Styledcontactus>
     <div className="contact-info">
         <h1>Contact Us</h1>
-        <p><i className="fas fa-envelope"></i>Email: sce-movie-social@ac.sce.ac.il</p>
-        <p><i className="fas fa-map-marker-alt"></i>Address: Haim Nachman Bialik 56, Beer Sheva, 84100, Israel</p>
+        <p>Email: sce-movie-social@ac.sce.ac.il</p>
+        <p>Address: Haim Nachman Bialik 56, Beer Sheva, 84100, Israel</p>
       </div>
 
       <form className="contact-form" onSubmit={handleSubmit}>
@@ -42,6 +128,18 @@ const ContactUs = () => {
     Please feel free to got in touch with us. <br></br>
     <br></br>
         </div>
+        <label htmlFor="name" className="form-label">
+            Full Name*
+          </label>
+          <div className="input-group">
+            <input
+              type="name"
+              id="name"
+              value={fullName}
+              className="form-input"
+              onChange={handleFullNameChange}
+            />
+            </div>
           <label htmlFor="email" className="form-label">
             Email Address*
           </label>
@@ -101,12 +199,13 @@ const Styledcontactus = styled.div`
   margin-bottom: 20px;
   width: 100%;
   max-width: 500px;
+  color: lightgray;
 }
 
 .form-label {
   margin-bottom: 10px;
   font-size: 18px;
-  color: #333;
+  color: lightgray;
 }
 
 .form-input {
@@ -148,6 +247,7 @@ const Styledcontactus = styled.div`
   align-items: center;
   max-width: 500px;
   margin: 50px auto;
+  font-size: 2rem;
 }
 
 .contact-info h2 {
@@ -158,7 +258,7 @@ const Styledcontactus = styled.div`
 
 .contact-info p {
   font-size: 16px;
-  color: #555;
+  color: lightgray;
   margin-bottom: 10px;
 }
 
