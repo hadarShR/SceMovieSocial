@@ -41,6 +41,9 @@ const Navbar = () => {
       case "favorites":
         navigate("/favorites");
         break;
+      case "contactUs":
+        navigate("/ContactUs");
+        break;
       default:
         break;
     }
@@ -67,7 +70,7 @@ const Navbar = () => {
               <a href="/search">Search</a>
             </li>
             <li>
-              <a href="/contact">Contact-us</a>
+              <a href="/contactus">Contact-us</a>
             </li>
             <li>
               <a href="/aboutus">About-us</a>

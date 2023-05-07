@@ -18,6 +18,7 @@ import AdminRoute from "./components/AdminRoute";
 import UserProfile from "./pages/UserProfile";
 import NotFound from "./pages/NotFound";
 import AdminMessages from "./pages/AdminMessages";
+import ContactUs from "./pages/ContactUs";
 
 const App = () => {
   const location = useLocation();
@@ -34,6 +35,7 @@ const App = () => {
           <Route path="/detail" element={<Detail />} />
           <Route path="/personDetails" element={<PersonDetail />} />
           <Route path="/aboutus" element={<AboutUs />} />
+          <Route path="/contactus" element={<ContactUs />} />
           <Route path="/search" element={<Search />} />
           <Route path="/userprofile" element={<UserProfile />} />
           <Route path="*" element={<NotFound />} />
