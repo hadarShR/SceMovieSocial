@@ -24,10 +24,10 @@ describe("Footer", () => {
     expect(wrapper.text()).toContain("SCE MOVIE SOCIAL");
     expect(wrapper.text()).toContain("Home");
     expect(wrapper.text()).toContain("Contact us");
-    expect(wrapper.text()).toContain("Term of services");
+    expect(wrapper.text()).toContain("Terms and policies");
     expect(wrapper.text()).toContain("About us");
     expect(wrapper.text()).toContain("FAQ");
-    expect(wrapper.text()).toContain("Pravacy policy");
+    expect(wrapper.text()).toContain("Cookies");
     expect(wrapper.text()).toContain("You must watch");
     expect(wrapper.text()).toContain("Recent release");
     expect(wrapper.text()).toContain("Top IMDB");
