@@ -43,17 +43,7 @@ const TermsAndPolicies=()=> {
                 </div> 
                 <div className="content">
                     <p>
-                        <b>3. Privacy Policy</b>
-                    </p>
-                    <p>
-                        Our Privacy Policy describes how we collect, use, and disclose information about our 
-                        users. By using the Site, you consent to our collection, use, and disclosure of your 
-                        information as described in the Privacy Policy.
-                    </p>
-                </div> 
-                <div className="content">
-                    <p>
-                        <b>4. User Content</b>
+                        <b>3. User Content</b>
                     </p>
                     <p>
                         The Site may allow users to upload or submit content, including but not limited to 
@@ -80,7 +70,7 @@ const TermsAndPolicies=()=> {
                 </div> 
                 <div className="content">
                     <p>
-                        <b>5. Prohibited Activities</b>
+                        <b>4. Prohibited Activities</b>
                     </p>
                     <p>
                         You agree not to engage in any of the following activities:
@@ -100,10 +90,6 @@ const TermsAndPolicies=()=> {
                         conducted on the Site;
                     </p>
                     <p>
-                        •	Use any robot, spider, scraper, or other automated means to access the Site or 
-                        to extract data; 
-                    </p>
-                    <p>
                         •	Attempt to bypass any measures we have put in place to prevent or restrict 
                         access to the Site;
                     </p>
@@ -118,12 +104,10 @@ const TermsAndPolicies=()=> {
                 </div>
                 <div className="content">
                     <p>
-                        <b>6. Disclaimer of Warranties</b>
+                        <b>5. Disclaimer of Warranties</b>
                     </p>
                     <p>
-                        THE SITE AND ITS CONTENT ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER 
-                        EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION, FITNESS FOR A PARTICULAR PURPOSE, 
-                        TITLE, NON-INFRINGEMENT, AND THOSE ARISING FROM COURSE OF DEAL
+                        THE SITE AND ITS CONTENT ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND.
                     </p>
                 </div>    
             </div>
