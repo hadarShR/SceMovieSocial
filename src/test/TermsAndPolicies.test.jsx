@@ -13,9 +13,9 @@ describe("TermsAndPolicies", () => {
         expect(wrapper).toHaveLength(1);
     });
 
-    it('should render without errors', () => {
+    it("should have a h1 element with text 'Terms & Policies'", () => {
         const wrapper = shallow(<TermsAndPolicies />);
-        expect(wrapper.find('h1')).toHaveLength(1);
+        expect(wrapper.find("h1").text()).toEqual("Terms & Policies");
     });
 
     it("should have a div with class 'termsandpolicies'", () => {
