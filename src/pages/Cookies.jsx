@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from "styled-components";
 
 const Cookies=()=> {
-  window.scrollTo(0, 0);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
       <Styledsection>
         <h1>Cookies</h1>
