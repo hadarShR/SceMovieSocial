@@ -19,6 +19,7 @@ import UserProfile from "./pages/UserProfile";
 import NotFound from "./pages/NotFound";
 import AdminMessages from "./pages/AdminMessages";
 import ContactUs from "./pages/ContactUs";
+import Cookies from "./pages/Cookies";
 
 const App = () => {
   const location = useLocation();
@@ -38,6 +39,7 @@ const App = () => {
           <Route path="/contactus" element={<ContactUs />} />
           <Route path="/search" element={<Search />} />
           <Route path="/userprofile" element={<UserProfile />} />
+          <Route path="/cookies" element={<Cookies />} />
           <Route path="*" element={<NotFound />} />
           <Route element={<AdminRoute />}>
             <Route path="/admin" element={<AdminDash />} />
