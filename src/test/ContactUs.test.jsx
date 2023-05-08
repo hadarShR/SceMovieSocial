@@ -17,11 +17,6 @@ describe("ContactUs component", () => {
     expect(wrapper.find("h1").text()).toEqual("Contact Us");
   });
 
-  test("renders without crashing", () => {
-    const wrapper = shallow(<ContactUs />);
-    expect(wrapper.exists()).toBe(true);
-  });
-
   test("submits form correctly", () => {
     const wrapper = shallow(<ContactUs />);
     const submitMock = jest.fn();
