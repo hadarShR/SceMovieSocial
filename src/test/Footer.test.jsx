@@ -24,7 +24,7 @@ describe("Footer", () => {
     expect(wrapper.text()).toContain("SCE MOVIE SOCIAL");
     expect(wrapper.text()).toContain("Home");
     expect(wrapper.text()).toContain("Contact us");
-    expect(wrapper.text()).toContain("Terms and policies");
+    expect(wrapper.text()).toContain("Terms and Policies");
     expect(wrapper.text()).toContain("About us");
     expect(wrapper.text()).toContain("FAQ");
     expect(wrapper.text()).toContain("Cookies");
