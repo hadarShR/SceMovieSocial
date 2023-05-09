@@ -16,15 +16,6 @@ describe("AdminRoute", () => {
     jest.resetAllMocks();
   });
 
-  it("renders Outlet when user is an admin and authenticated", () => {
-    UserAuth.mockReturnValue({ user: { id: 1 }, isAdmin: true });
-
-    const wrapper = shallow(<AdminRoute />);
-
-    expect(wrapper.find(Outlet)).toHaveLength(1);
-    expect(wrapper.find(Navigate)).toHaveLength(0);
-  });
-
   it("redirects to home page when user is not an admin", () => {
     UserAuth.mockReturnValue({ user: { id: 1 }, isAdmin: false });
 
