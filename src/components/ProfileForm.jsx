@@ -25,13 +25,13 @@ const Profile = ({ user, userFirestoreDoc }) => {
       const docRef = doc(db, "users", user.uid);
 
       const docData = {
-        website: website,
-        instagram: instagram,
-        facebook: facebook,
-        linkedin: linkedin,
-        degree: degree,
-        track: track,
-        degreeYear: degreeYear,
+        website: website !== undefined ? website : "",
+        instagram: instagram !== undefined ? instagram : "",
+        facebook: facebook !== undefined ? facebook : "",
+        linkedin: linkedin !== undefined ? linkedin : "",
+        degree: degree !== undefined ? degree : "Bachelor's Degree",
+        track: track !== undefined ? track : "Academic Preparatory Program",
+        degreeYear: degreeYear !== undefined ? degreeYear : "First",
       };
 
       await setDoc(docRef, docData, { merge: true });
