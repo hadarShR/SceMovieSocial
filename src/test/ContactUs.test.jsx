@@ -1,5 +1,5 @@
 import React from "react";
-import { configure, shallow } from "enzyme";
+import { configure, shallow, mount } from "enzyme";
 import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
 import ContactUs from "../pages/ContactUs";
 import "jest-extended";
@@ -36,6 +36,16 @@ describe("ContactUs component", () => {
     expect(fullNameInput.prop('value')).toEqual('');
     expect(emailInput.prop('value')).toEqual('');
     expect(messageInput.prop('value')).toEqual('');
+  });
+
+  it('should render correctly', () => {
+    const wrapper = shallow(<ContactUs />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('contact-form rendered component', () => {
+    const wrapper = shallow(<ContactUs />);
+    expect(wrapper.find('.contact-form')).toHaveLength(1);
   });
 
 });
