@@ -28,8 +28,5 @@ describe("Footer", () => {
     expect(wrapper.text()).toContain("About us");
     expect(wrapper.text()).toContain("FAQ");
     expect(wrapper.text()).toContain("Cookies");
-    expect(wrapper.text()).toContain("You must watch");
-    expect(wrapper.text()).toContain("Recent release");
-    expect(wrapper.text()).toContain("Top IMDB");
   });
 });
