@@ -2,7 +2,7 @@ pipeline {
     agent {
         docker {
             image 'michaelmagic97/sce-movie-social:v1.0'
-            args '-P 3001:3001 -u root'
+            args '-p 3000:3001 -u root'
         }
     }
     stages {
