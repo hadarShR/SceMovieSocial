@@ -48,7 +48,9 @@ const SideBar = ({ user }) => {
           <Link to="/adminMessages">
             <li style={{ padding: 16 }}>Messages</li>
           </Link>
-          <li style={{ padding: 16 }}>Posts</li>
+          <Link to="/postsReports">
+            <li style={{ padding: 16 }}>Posts-Reports</li>
+          </Link>
           <li style={{ padding: 16 }}>Admins</li>
         </ul>
       </div>

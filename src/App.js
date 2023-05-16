@@ -21,6 +21,7 @@ import AdminMessages from "./pages/AdminMessages";
 import ContactUs from "./pages/ContactUs";
 import Cookies from "./pages/Cookies";
 import TermsAndPolicies from "./pages/TermsAndPolicies";
+import PostsReports from "./pages/PostsReports";
 
 
 const App = () => {
@@ -31,7 +32,7 @@ const App = () => {
       <AuthContextProvider>
         {location.pathname !== "/admin" &&
           location.pathname !== "/activeusers" &&
-          location.pathname !== "/adminMessages" && <Navbar />}
+          location.pathname !== "/adminMessages" && location.pathname !== "/postsReports" && <Navbar />}
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
@@ -48,11 +49,12 @@ const App = () => {
             <Route path="/admin" element={<AdminDash />} />
             <Route path="/activeusers" element={<ActiveUsers />} />
             <Route path="/adminMessages" element={<AdminMessages />} />
+            <Route path="/postsReports" element={<PostsReports />} />
           </Route>
         </Routes>
         {location.pathname !== "/admin" &&
           location.pathname !== "/activeusers" &&
-          location.pathname !== "/adminMessages" && <Footer />}
+          location.pathname !== "/adminMessages" && location.pathname !== "/postsReports" && <Footer />}
       </AuthContextProvider>
     </>
   );
