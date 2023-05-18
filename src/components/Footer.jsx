@@ -13,18 +13,15 @@ const Footer = () => {
         <div className="footer__content__menus">
           <div className="footer__content__menu">
             <Link to="/">Home</Link>
-            <Link to="/contactus">Contact us</Link>
             <Link to="/termsandpolicies">Terms and Policies</Link>
           </div>
           <div className="footer__content__menu">
             <Link to="/aboutus">About us</Link>
-            <Link to="/">FAQ</Link>
-            <Link to="/cookies">Cookies</Link>
+            <Link to="/contactus">Contact us</Link>
           </div>
           <div className="footer__content__menu">
-            <Link to="/">You must watch</Link>
-            <Link to="/">Recent release</Link>
-            <Link to="/">Top IMDB</Link>
+            <Link to="/">FAQ</Link>
+            <Link to="/cookies">Cookies</Link>
           </div>
         </div>
       </div>
