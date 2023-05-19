@@ -42,6 +42,9 @@ const SideBar = ({ user }) => {
             marginTop: "2rem",
           }}
         >
+          <Link to="/admin">
+            <li style={{ padding: 16 }}>Dashboard</li>
+          </Link>
           <Link to="/activeusers">
             <li style={{ padding: 16 }}>Users</li>
           </Link>
@@ -51,7 +54,9 @@ const SideBar = ({ user }) => {
           <Link to="/postsReports">
             <li style={{ padding: 16 }}>Posts-Reports</li>
           </Link>
-          <li style={{ padding: 16 }}>Admins</li>
+          <Link to="/addAdmin">
+            <li style={{ padding: 16 }}>Add Admins</li>{" "}
+          </Link>
         </ul>
       </div>
     </StyledSection>
