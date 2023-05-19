@@ -22,7 +22,7 @@ import ContactUs from "./pages/ContactUs";
 import Cookies from "./pages/Cookies";
 import TermsAndPolicies from "./pages/TermsAndPolicies";
 import PostsReports from "./pages/PostsReports";
-
+import AddAdmin from "./pages/AddAdmin";
 
 const App = () => {
   const location = useLocation();
@@ -32,7 +32,9 @@ const App = () => {
       <AuthContextProvider>
         {location.pathname !== "/admin" &&
           location.pathname !== "/activeusers" &&
-          location.pathname !== "/adminMessages" && location.pathname !== "/postsReports" && <Navbar />}
+          location.pathname !== "/adminMessages" &&
+          location.pathname !== "/postsReports" &&
+          location.pathname !== "/addAdmin" && <Navbar />}
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
@@ -50,11 +52,14 @@ const App = () => {
             <Route path="/activeusers" element={<ActiveUsers />} />
             <Route path="/adminMessages" element={<AdminMessages />} />
             <Route path="/postsReports" element={<PostsReports />} />
+            <Route path="/addAdmin" element={<AddAdmin />} />
           </Route>
         </Routes>
         {location.pathname !== "/admin" &&
           location.pathname !== "/activeusers" &&
-          location.pathname !== "/adminMessages" && location.pathname !== "/postsReports" && <Footer />}
+          location.pathname !== "/adminMessages" &&
+          location.pathname !== "/postsReports" &&
+          location.pathname !== "/addAdmin" && <Footer />}
       </AuthContextProvider>
     </>
   );
