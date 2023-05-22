@@ -23,6 +23,7 @@ import Cookies from "./pages/Cookies";
 import TermsAndPolicies from "./pages/TermsAndPolicies";
 import PostsReports from "./pages/PostsReports";
 import AddAdmin from "./pages/AddAdmin";
+import Faq from "./pages/Faq";
 
 const App = () => {
   const location = useLocation();
@@ -46,6 +47,7 @@ const App = () => {
           <Route path="/userprofile" element={<UserProfile />} />
           <Route path="/cookies" element={<Cookies />} />
           <Route path="/termsandpolicies" element={<TermsAndPolicies />} />
+          <Route path="/faq" element={<Faq />} />
           <Route path="*" element={<NotFound />} />
           <Route element={<AdminRoute />}>
             <Route path="/admin" element={<AdminDash />} />
