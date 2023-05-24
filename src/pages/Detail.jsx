@@ -9,14 +9,20 @@ import MovieSlide from "../components/MovieSlide";
 import BackdropSlide from "../components/BackdropSlide";
 import PosterSlide from "../components/PosterSlide";
 import GlobalLoading from "../components/GlobalLoading";
+import FavoritesButton from "../components/FavoritesButton ";
+import { UserAuth } from "../context/AuthContext";
+import UserRating from "../components/UserRating";
+import SharePost from "../components/SharePost";
 
 const Detail = () => {
-  const { item, MediaType } = useLocation().state; //getting props
+  const { item, MediaType } = useLocation().state ?? {}; //getting props
   const [loading, setLoading] = useState(false);
   const [detail, setDetail] = useState(null);
   const [images, setImages] = useState(null);
   const [runtime, setRuntime] = useState("");
   const [release_date, setReleaseDate] = useState("");
+
+  const { user } = UserAuth() ?? {};
 
   //memo
   const CastSlideMemo = React.memo(CastSlide);
@@ -50,7 +56,7 @@ const Detail = () => {
 
   return (
     <>
-      {loading ? (
+      {!user || loading ? (
         <GlobalLoading />
       ) : (
         <>
@@ -87,6 +93,11 @@ const Detail = () => {
                   </div>
                   <p className="overview">{item.overview}</p>
                   <div className="time" style={{ display: "flex" }}>
+                    <FavoritesButton
+                      item={item}
+                      user={user}
+                      MediaType={MediaType}
+                    />
                     <p style={{}}>Release date : {release_date}</p>
                     {MediaType === "movie" ? (
                       <p style={{ marginLeft: "3rem" }}>
@@ -95,6 +106,14 @@ const Detail = () => {
                     ) : (
                       <p style={{ marginLeft: "3rem" }}>Seasons : {runtime}</p>
                     )}
+
+                    <UserRating
+                      readOnly={true}
+                      showButton={false}
+                      user={user}
+                      MediaType={MediaType}
+                      item={item}
+                    />
                   </div>
 
                   <div className="cast">
@@ -184,6 +203,34 @@ const Detail = () => {
                 )}
                 {/* media posters */}
 
+                {/* User Rating */}
+                <div
+                  className="User-rating"
+                  style={{
+                    paddingTop: "3.5rem",
+                    paddingBottom: "3.5rem",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    transform: "scale(1.5)",
+                    transformOrigin: "center",
+                  }}
+                >
+                  <UserRating
+                    readOnly={false}
+                    showButton={true}
+                    user={user}
+                    MediaType={MediaType}
+                    item={item}
+                  />
+                </div>
+                {/* End of User Rating */}
+
+                <div className="user-post">
+                  <SharePost user={user} MediaType={MediaType} item={item} />
+                </div>
+
                 <div className="section mb-3">
                   <div
                     className="section__header mb-2"
@@ -201,7 +248,7 @@ const Detail = () => {
                 </div>
               </div>
             </>
-          )}{" "}
+          )}
         </>
       )}
     </>
