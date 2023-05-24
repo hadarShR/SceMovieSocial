@@ -25,7 +25,6 @@ const MediaList = ({ mediaType }) => {
     return storedTotalPages ? parseInt(storedTotalPages) : 1;
   });
 
-  // Asynchronous function to handle page change
   async function handlePageChange(newPage = 1) {
     setPage(newPage);
 
@@ -34,26 +33,22 @@ const MediaList = ({ mediaType }) => {
     setTotalPages(Response.total_pages);
     localStorage.setItem("media", JSON.stringify(Response.results));
 
-    // Store the current page in local storage based on media type
     if (mediaType === "movie") {
       localStorage.setItem("MovieMediaPage", newPage);
     } else {
       localStorage.setItem("TvMediaPage", newPage);
     }
-    // Store the total pages in local storage
+
     localStorage.setItem("MediaTotalPages", Response.total_pages);
 
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
-  // useEffect hook to fetch media based on media type
   useEffect(() => {
     setLoading(true);
     window.scrollTo(0, 0);
     const getMedia = async () => {
-      // Retrieve media list for the current page
       const Response = await getMediaListByPage(mediaType, "popular", page);
-      // Update media state with the fetched results
       setMedia(Response.results);
       setTotalPages(Response.total_pages);
       localStorage.setItem("media", JSON.stringify(Response.results));
