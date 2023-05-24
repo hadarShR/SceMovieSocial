@@ -21,12 +21,16 @@ import AdminMessages from "./pages/AdminMessages";
 import ContactUs from "./pages/ContactUs";
 import Cookies from "./pages/Cookies";
 import TermsAndPolicies from "./pages/TermsAndPolicies";
+import FavoritesPage from "./pages/FavoritesPage ";
+import MediaList from "./pages/MediaList";
+import PostsPage from "./pages/PostsPage";
 import PostsReports from "./pages/PostsReports";
 import AddAdmin from "./pages/AddAdmin";
 import Faq from "./pages/Faq";
 
 const App = () => {
   const location = useLocation();
+
   return (
     <>
       <ToastContainer />
@@ -48,6 +52,15 @@ const App = () => {
           <Route path="/cookies" element={<Cookies />} />
           <Route path="/termsandpolicies" element={<TermsAndPolicies />} />
           <Route path="/faq" element={<Faq />} />
+          <Route path="/favorites" element={<FavoritesPage />} />
+          <Route path="/movie" element={<MediaList mediaType="movie" />} />
+          <Route path="/tv" element={<MediaList mediaType="tv" />} />
+          <Route path="/Posts" element={<PostsPage />} />
+          <Route path="/myPosts" element={<PostsPage myPosts={true} />} />
+          <Route
+            path="/myFavorites"
+            element={<PostsPage myFavorites={true} />}
+          />
           <Route path="*" element={<NotFound />} />
           <Route element={<AdminRoute />}>
             <Route path="/admin" element={<AdminDash />} />
