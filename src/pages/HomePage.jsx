@@ -8,7 +8,7 @@ import { UserAuth } from "../context/AuthContext";
 import PopUp from "../components/PopUp";
 
 const HomePage = () => {
-  const { user, isLoading } = UserAuth() ?? {};
+  const { user, isLoading, userIsBlocked } = UserAuth() ?? {};
   const [PopUpTime, setPopUpTime] = useState(true);
   const [timeoutId, setTimeoutId] = useState(null);
 
@@ -25,7 +25,7 @@ const HomePage = () => {
 
   return (
     <>
-      {!isLoading && !user && !PopUpTime && <PopUp />}
+      {!isLoading && !user && !PopUpTime && !userIsBlocked && <PopUp />}
       <HeroSlide />
       <div className="container">
         <div className="section mb-3">
