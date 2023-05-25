@@ -8,9 +8,11 @@ import { Button } from "@mui/material";
 import { useNavigate } from "react-router";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
+import { getDoc } from "firebase/firestore";
 
 const LoginPage = () => {
-  const { googleSignIn, createUserDocument, user } = UserAuth() ?? {};
+  const { googleSignIn, createUserDocument, user, userIsBlocked } =
+    UserAuth() ?? {};
 
   const navigate = useNavigate();
 
@@ -19,22 +21,47 @@ const LoginPage = () => {
       const { user } = await googleSignIn();
       const userDocRef = await createUserDocument(user);
 
-      if (user) {
-        toast.success("You have successfully signed in!", {
-          position: "bottom-left",
-          autoClose: 4100,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          style: {
-            fontFamily: "Arial",
-            fontSize: "15px",
-            fontWeight: "bold",
-            color: "#4CAF50",
-            borderRadius: "5px",
-            paddingLeft: "10px",
-          },
-        });
+      const userSnapshot = await getDoc(userDocRef);
+      if (userSnapshot.exists()) {
+        const userData = userSnapshot.data();
+        if (
+          userData?.blockedUntil !== undefined &&
+          Date.now() < userData?.blockedUntil
+        ) {
+          toast.info("your User has been Blocked !", {
+            position: "bottom-left",
+            autoClose: 4100,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            style: {
+              fontFamily: "Arial",
+              fontSize: "16px",
+              fontWeight: "bold",
+              color: "red",
+              borderRadius: "5px",
+              paddingLeft: "10px",
+            },
+          });
+        } else if (user) {
+          toast.success("You have successfully signed in!", {
+            position: "bottom-left",
+            autoClose: 4100,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            style: {
+              fontFamily: "Arial",
+              fontSize: "15px",
+              fontWeight: "bold",
+              color: "#4CAF50",
+              borderRadius: "5px",
+              paddingLeft: "10px",
+            },
+          });
+        }
+      } else {
+        console.log("User does not exist");
       }
     } catch (error) {
       toast.error(error, {

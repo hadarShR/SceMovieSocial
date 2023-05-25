@@ -8,6 +8,8 @@ import {
 } from "firebase/auth";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { auth, db } from "../firebase/firebase";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router";
 
 const AuthContext = createContext();
 
@@ -15,7 +17,9 @@ export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isAdmin, setIsadmin] = useState(false);
+  const [userIsBlocked, setUserIsBlocked] = useState(false);
   const [userFirestoreDoc, setUserFirestoreDoc] = useState(null);
+  const navigate = useNavigate();
 
   const logOut = () => {
     signOut(auth);
@@ -111,6 +115,40 @@ export const AuthContextProvider = ({ children }) => {
     GetUserFirestoreDoc();
   }, [user]);
 
+  useEffect(() => {
+    async function handleBlockedUser() {
+      if (
+        userFirestoreDoc?.blockedUntil !== undefined &&
+        Date.now() < userFirestoreDoc?.blockedUntil
+      ) {
+        setUserIsBlocked(true);
+
+        const daysRemaining = Math.ceil(
+          (userFirestoreDoc?.blockedUntil - Date.now()) / (1000 * 60 * 60 * 24)
+        );
+
+        try {
+          await logOut();
+          localStorage.removeItem("isAdmin");
+          navigate("/");
+        } catch (error) {
+          console.log(error);
+        }
+
+        // Show Blocked dialog
+        const confirmDelete = await Swal.fire({
+          title: `Your User has been Blocked for ${daysRemaining} days`,
+          text: "This action cannot be undone.",
+          icon: "info",
+          confirmButtonText: "OK",
+          confirmButtonColor: "#f44336",
+        });
+      }
+    }
+    handleBlockedUser();
+    // eslint-disable-next-line
+  }, [userFirestoreDoc, navigate]);
+
   return (
     <AuthContext.Provider
       value={{
@@ -121,6 +159,7 @@ export const AuthContextProvider = ({ children }) => {
         isLoading,
         isAdmin,
         userFirestoreDoc,
+        userIsBlocked,
       }}
     >
       {children}
