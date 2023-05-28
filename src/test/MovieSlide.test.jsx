@@ -4,13 +4,6 @@ import MovieSlide from "../components/MovieSlide";
 import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
 import "jest-extended";
 import { useState } from "react";
-import {
-  A11y,
-  Navigation,
-  Pagination,
-  Swiper,
-  SwiperSlide,
-} from "../test/swiperMock";
 
 configure({ adapter: new Adapter() });
 
