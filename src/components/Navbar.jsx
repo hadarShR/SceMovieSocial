@@ -61,6 +61,9 @@ const Navbar = () => {
         <div className="pages">
           <ul>
             <li>
+              <a href="/posts">Posts</a>
+            </li>
+            <li>
               <a href="/movie">Movie</a>
             </li>
             <li>

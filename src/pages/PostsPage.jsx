@@ -8,6 +8,7 @@ import { useCollectionData } from "react-firebase-hooks/firestore";
 import { db } from "../firebase/firebase";
 import GlobalLoading from "../components/GlobalLoading";
 import { UserAuth } from "../context/AuthContext";
+import ScrollToTopIcon from "../components/ScrollToTopIcon";
 
 const PostsPage = ({ myPosts, myFavorites }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -114,6 +115,7 @@ const PostsPage = ({ myPosts, myFavorites }) => {
             <PostsSideBar sortedLikes={sortedLikes} />
             <Feed posts={sortedDocs} user={user} />
           </div>
+          <ScrollToTopIcon />
         </StyledSection>
       )}
     </>

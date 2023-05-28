@@ -26,7 +26,7 @@ import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 import { ClipLoader } from "react-spinners";
 import apiConfig from "../api/apiConfig";
-import OtherUserProfile from "../pages/OtherUserProfile";
+import OtherUserProfile from "./OtherUserProfile";
 
 const Post = ({ post, user }) => {
   const [likesAmount, setLikesAmount] = useState(
@@ -397,7 +397,9 @@ const Post = ({ post, user }) => {
 
   return (
     <>
-      {userPopUp && <OtherUserProfile />}
+      {userPopUp && (
+        <OtherUserProfile setUserPopUp={setUserPopUp} postUser={postUser} />
+      )}
       <StyledSection>
         {showComments && (
           <div className="commentsSidebar">
