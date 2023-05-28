@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
-import { Swiper, SwiperSlide } from "swiper/react";
 import tmdbConfigs from "../api/apiConfig";
 import { A11y, Navigation, Pagination } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 const BackdropSlide = ({ backdrops }) => {
   return (

@@ -4,7 +4,8 @@ import { LoadingButton } from "@mui/lab";
 import { toast } from "react-toastify";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
-import { deleteDoc, doc } from "firebase/firestore";
+import { deleteDoc, doc, getDocs } from "firebase/firestore";
+import { collection } from "firebase/firestore";
 import { db } from "../firebase/firebase";
 import Swal from "sweetalert2";
 
@@ -20,20 +21,26 @@ const ReportsTable = ({ reportsPosts }) => {
     if (isLoading) return;
 
     // Show confirmation dialog
-     const confirmDelete = await Swal.fire({
-        title: "Are you sure you want to delete this post?",
-        text: "This action cannot be undone.",
-        icon: "question",
-        showCancelButton: true,
-        confirmButtonText: "Delete",
-        cancelButtonText: "Cancel",
-        confirmButtonColor: "#f44336",
-        cancelButtonColor: "#2196f3",
-      });
-  
-      if (!confirmDelete.isConfirmed) return;
+    const confirmDelete = await Swal.fire({
+      title: "Are you sure you want to delete this post?",
+      text: "This action cannot be undone.",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonText: "Delete",
+      cancelButtonText: "Cancel",
+      confirmButtonColor: "#f44336",
+      cancelButtonColor: "#2196f3",
+    });
+
+    if (!confirmDelete.isConfirmed) return;
     setIsLoading(true);
-      console.log(id);
+    const commentsCollectionRef = collection(db, `posts/${id}/comments`);
+
+    const commentsSnapshot = await getDocs(commentsCollectionRef);
+    commentsSnapshot.forEach((comment) => {
+      deleteDoc(comment.ref);
+    });
+
     deleteDoc(doc(db, `posts/${id}`))
       .then(() => {
         toast.success("Removed post from DB!", {
@@ -73,7 +80,6 @@ const ReportsTable = ({ reportsPosts }) => {
     setIsLoading(false);
   };
 
-
   return (
     <TableWrapper>
       <thead>
@@ -86,7 +92,7 @@ const ReportsTable = ({ reportsPosts }) => {
       </thead>
       <tbody>
         {reportsPosts &&
-            reportsPosts.map((reportPost, index) => (
+          reportsPosts.map((reportPost, index) => (
             <React.Fragment key={index}>
               <TableRow key={index} onClick={() => handleRowClick(index)}>
                 <TableData>{index}</TableData>
@@ -102,7 +108,6 @@ const ReportsTable = ({ reportsPosts }) => {
                         Text:
                         <div className="message-div">{reportPost.text}</div>
                       </div>
-                     
 
                       <div className="buttons">
                         {isLoading ? (
@@ -121,7 +126,7 @@ const ReportsTable = ({ reportsPosts }) => {
                         ) : (
                           <LoadingButton
                             onClick={() => {
-                                deletePost(reportPost.id);
+                              deletePost(reportPost.id);
                             }}
                             variant="contained"
                             sx={{
