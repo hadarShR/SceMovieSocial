@@ -1,7 +1,8 @@
+import React from "react";
 import GlobalLoading from "../components/GlobalLoading";
 import { configure, shallow } from "enzyme";
 import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
-import React from "react";
+
 // Configure Enzyme with the adapter for React 17
 configure({ adapter: new Adapter() });
 
