@@ -45,7 +45,7 @@ const AddAdmin = () => {
     setEmail("");
     setDisplayName("");
   };
-  console.log(email);
+
   const handleAddAdmin = async () => {
     if (isLoading) {
       return;

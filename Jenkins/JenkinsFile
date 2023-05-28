@@ -11,7 +11,12 @@ pipeline {
                 sh 'yarn install'
             }
         }
-        stage('Test') {
+        stage('Linting') {
+            steps {
+                sh 'yarn lint'
+            }
+        }
+        stage('Unit Test and Integration tests') {
             steps {
                 sh 'yarn test'
             }
@@ -19,6 +24,11 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'yarn build'
+            }
+        }
+        stage('Check for formatting issues') {
+            steps {
+                sh 'yarn run format:check' 
             }
         }
     }
