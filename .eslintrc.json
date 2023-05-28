@@ -2,7 +2,7 @@
   "env": {
     "browser": true,
     "es2021": true,
-    "node": true // Add this line to enable Node.js environment
+    "node": true
   },
   "extends": ["eslint:recommended", "plugin:react/recommended"],
   "parserOptions": {
@@ -23,5 +23,6 @@
     "react/no-unescaped-entities": "off",
     "react/no-unknown-property": "off",
     "react-hooks/exhaustive-deps": "off"
-  }
+  },
+  "ignorePatterns": ["path/to/file.js", "src/test"]
 }
