@@ -1,71 +1,62 @@
-# Getting Started with Create React App
+# SCE-MOVIE-SOCIAL
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### `Pictures:`
 
-## Available Scripts
+<img src="https://github.com/BS-PMC-2023/BS-PMC-2023-Team23/assets/93651794/e00a4ba1-eea0-42cf-b20c-4f31f48a22bd" width="35%" height="30%"  ></img> 
+<img src="https://github.com/BS-PMC-2023/BS-PMC-2023-Team23/assets/93651794/07bbf6c6-8312-4a3b-97ea-689038c7e7ee" width="35%" height="35%"  ></img> 
+<img src="https://github.com/BS-PMC-2023/BS-PMC-2023-Team23/assets/93651794/1d6a78ca-0e8b-4ef0-8baa-676258f21af7" width="35%" height="35%"  ></img> 
+<img src="https://github.com/BS-PMC-2023/BS-PMC-2023-Team23/assets/93651794/dbd0e3b4-2c4d-46e3-b670-d696636b11ef" width="35%" height="35%"  ></img> 
+<img src="https://github.com/BS-PMC-2023/BS-PMC-2023-Team23/assets/93651794/d88e9c7f-92d4-45af-9be3-2f0d867d8150" width="35%" height="35%"  ></img> 
+<img src="https://github.com/BS-PMC-2023/BS-PMC-2023-Team23/assets/93651794/a79e0f1d-9016-494d-9d21-baf76fb95552" width="35%" height="35%"  ></img> 
 
-In the project directory, you can run:
+## Description
 
-### `npm start`
+SCE-MOVIE-SOCIAL is a web application that allows students of SCE - Shamoon College of Engineering to discover and interact with movies and TV series. It is built using React and utilizes the TMDB API for fetching movie and series data. The Firebase platform is used as the backend and database solution.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+The app provides features such as User authentication and profile management, Search for movies and TV series, Viewing detailed information about movies/series,Create and manage a watchlist, Rate and review movies/series and more. It aims to provide a social platform for movie enthusiasts among the students of SCE to share their thoughts and discover new content.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+This README provides information on how to set up the project locally, as well as important dependencies and commands.
 
-### `npm test`
+## Technologies Used
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- React.js
+- Context
+- Node.js
+- Axios
+- Firebase (Database)
+- TMDB API
+- Jira
+- Jenkins
+- netlify
 
-### `npm run build`
+## Demo
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+A live demo of the application will be available soon.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Installation
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. Clone the repository:
 
-### `npm run eject`
+       git clone https://github.com/BS-PMC-2023/BS-PMC-2023-Team23.git
+   
+2. Install the dependencies:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+       yarn install   
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+3. Start the development server:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+       yarn start
+  
+4. Open the app in your browser:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+       Open http://localhost:3000 to view it in the browser.
+   
+## Tests
+The project includes a comprehensive test suite consisting of 158 unit and integration tests. The tests cover various components, actions, reducers, and API integrations. They ensure the functionality and stability of the application across different scenarios. To run the tests, use the following command:
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+       yarn test   
+   
+   
+   
+Feel free to contact our team :)
 # BS-PMC-2023-Team23
