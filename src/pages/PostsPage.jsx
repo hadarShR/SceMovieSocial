@@ -9,11 +9,14 @@ import { db } from "../firebase/firebase";
 import GlobalLoading from "../components/GlobalLoading";
 import { UserAuth } from "../context/AuthContext";
 import ScrollToTopIcon from "../components/ScrollToTopIcon";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const PostsPage = ({ myPosts, myFavorites }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [sortedDocs, setSortedDocs] = useState([]);
   const [sortedLikes, setSortedLikes] = useState([]);
+  const navigate = useNavigate();
 
   //getting posts (Firestore) documents
   const postsRef = collection(db, "posts");
@@ -100,6 +103,26 @@ const PostsPage = ({ myPosts, myFavorites }) => {
       const uniqueLikesArray = Object.values(uniqueUsers);
 
       setSortedLikes(uniqueLikesArray);
+
+      if (!user) {
+        //Navigate to the "/" route
+        navigate("/");
+        toast.error("To enter the posts page, please Login.", {
+          position: "bottom-left",
+          autoClose: 4500,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          style: {
+            fontFamily: "Arial",
+            fontSize: "15px",
+            fontWeight: "bold",
+            color: "red",
+            borderRadius: "5px",
+            padding: "10px",
+          },
+        });
+      }
 
       setIsLoading(false); // Set isLoading to false after sorting is done
     }

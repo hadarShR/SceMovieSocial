@@ -233,14 +233,12 @@ const Post = ({ post, user }) => {
         setIsReported(false);
       }
     });
-  }, []);
+  }, [post]);
 
   const handlePostDelete = async () => {
-    if (!user || isLoading) {
+    if (!user || isLoading || isLikeLoading) {
       return;
     }
-
-    setIsLoading(true);
 
     const confirmDelete = await Swal.fire({
       title: "Are you sure you want to delete this post?",
@@ -272,6 +270,7 @@ const Post = ({ post, user }) => {
         });
         deleteDoc(postDocRef)
           .then(() => {
+            window.location.reload(); // reload the page
             toast.success("Post removed !", {
               position: "bottom-left",
               autoClose: 3900,
@@ -307,7 +306,6 @@ const Post = ({ post, user }) => {
           });
       }
     }
-    setIsLoading(false);
   };
 
   const handleReport = async () => {
