@@ -1,15 +1,11 @@
 /* eslint-disable no-unused-vars */
 import { useContext, createContext, useEffect, useState } from "react";
-import {
-  GoogleAuthProvider,
-  signInWithPopup,
-  signInWithRedirect,
-  signOut,
-} from "firebase/auth";
+import { GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { auth, db } from "../firebase/firebase";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router";
+import { toast } from "react-toastify";
 
 const AuthContext = createContext();
 
@@ -22,25 +18,47 @@ export const AuthContextProvider = ({ children }) => {
   const navigate = useNavigate();
 
   const logOut = () => {
-    signOut(auth);
+    signOut(auth); // Signs out the user
   };
 
   const googleSignIn = () => {
-    const provider = new GoogleAuthProvider();
+    const provider = new GoogleAuthProvider(); // Creates a new instance of GoogleAuthProvider
 
     provider.setCustomParameters({ hd: "ac.sce.ac.il" }); //allows only SCE email in SignIn
-    provider.addScope("profile");
-    provider.addScope("email");
+    provider.addScope("profile"); // Requests user's profile information
+    provider.addScope("email"); // Requests user's email address
 
-    return signInWithPopup(auth, provider);
+    return signInWithPopup(auth, provider).then((result) => {
+      const email = result.user.email; // Retrieves the signed-in user's email address
+      const validDomain = "ac.sce.ac.il";
+
+      if (!email.endsWith(`@${validDomain}`)) {
+        logOut(); // Invalid email domain, log out the user
+        toast.error("Invalid email domain. Please use an ac.sce.ac.il email.", {
+          position: "bottom-left",
+          autoClose: 4500,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          style: {
+            fontFamily: "Arial",
+            fontSize: "15px",
+            fontWeight: "bold",
+            color: "red",
+            borderRadius: "5px",
+            padding: "10px",
+          },
+        });
+      }
+    });
   };
 
   const createUserDocument = async (userAuth) => {
-    if (!userAuth) return;
+    if (!userAuth) return; // If userAuth is null, return
 
     const userDocRef = doc(db, "users", userAuth.uid);
 
-    const userSnapshot = await getDoc(userDocRef);
+    const userSnapshot = await getDoc(userDocRef); // Retrieves the document snapshot of the user
 
     //if user data does not exists -> create/set the document with data from userAuth in my collection
     if (!userSnapshot.exists()) {
