@@ -6,7 +6,7 @@
 <img src="https://github.com/BS-PMC-2023/BS-PMC-2023-Team23/assets/93651794/07bbf6c6-8312-4a3b-97ea-689038c7e7ee" width="35%" height="35%"  ></img> 
 <img src="https://github.com/BS-PMC-2023/BS-PMC-2023-Team23/assets/93651794/1d6a78ca-0e8b-4ef0-8baa-676258f21af7" width="35%" height="35%"  ></img> 
 <img src="https://github.com/BS-PMC-2023/BS-PMC-2023-Team23/assets/93651794/dbd0e3b4-2c4d-46e3-b670-d696636b11ef" width="35%" height="35%"  ></img> 
-<img src="https://github.com/BS-PMC-2023/BS-PMC-2023-Team23/assets/93651794/d88e9c7f-92d4-45af-9be3-2f0d867d8150" width="35%" height="35%"  ></img> 
+<img src="https://github.com/BS-PMC-2023/BS-PMC-2023-Team23/assets/93651794/765624f5-f5a8-402d-9c13-f34c9b33c06c" width="35%" height="35%"  ></img> 
 <img src="https://github.com/BS-PMC-2023/BS-PMC-2023-Team23/assets/93651794/a79e0f1d-9016-494d-9d21-baf76fb95552" width="35%" height="35%"  ></img> 
 
 ## Description
@@ -27,6 +27,7 @@ This README provides information on how to set up the project locally, as well a
 - TMDB API
 - Jira
 - Jenkins
+- Docker 
 - netlify
 
 ## Demo
