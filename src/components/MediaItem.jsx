@@ -5,6 +5,8 @@ import Button from "./Button";
 import photoComingSoon from "../assets/photo-coming-soon.jpg";
 import apiConfig from "../api/apiConfig";
 import { UserAuth } from "../context/AuthContext";
+import Typography from "@mui/material/Typography";
+import ReadMoreIcon from "@mui/icons-material/ReadMore";
 
 const MediaItem = ({ media, mediaType }) => {
   const [title, setTitle] = useState("");
@@ -62,9 +64,12 @@ const MediaItem = ({ media, mediaType }) => {
             >
               {user ? (
                 <Button>
-                  <div style={{ scale: "1.4", paddingTop: "3px" }}>
-                    <PlayArrowIcon />
-                  </div>
+                <Typography variant="h6" style={{ fontWeight: "bold", marginTop: "1rem" }}>
+  Read More
+</Typography>
+<div style={{ paddingTop: "3px" }}>
+  <ReadMoreIcon fontSize="large" />
+</div>
                 </Button>
               ) : (
                 <> </>
