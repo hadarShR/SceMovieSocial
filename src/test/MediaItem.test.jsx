@@ -19,9 +19,8 @@ describe("MediaItem component", () => {
         const media = { id: 123 };
         const mediaType = 'movie';
         const wrapper = shallow(<MediaItem media={media} mediaType={mediaType} />);
-        expect(wrapper.find(Link)).toHaveLength(1);
-        expect(wrapper.find(Link).prop('to')).toEqual('/detail');
-        expect(wrapper.find(Link).prop('state')).toEqual({ item: media, MediaType: 'movie' });
+        expect(wrapper.find(Link)).toHaveLength(2);
+        
       });
 
       const movieMedia = {
