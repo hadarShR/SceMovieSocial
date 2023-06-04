@@ -9,6 +9,7 @@ import "../scss/hero-slide.scss";
 import { getMediaList } from "../api/axiosClient";
 import GlobalLoading from "./GlobalLoading";
 import { UserAuth } from "../context/AuthContext";
+import UserRating from "./UserRating";
 
 const HeroSlide = () => {
   const [popularMovies, setPopularMovies] = useState([]);
@@ -94,8 +95,27 @@ const HeroSlideItem = (props) => {
             ) : null}
           </div>
         </div>
-        <div className="hero-slide__item__content__poster">
+
+        <div
+          className="hero-slide__item__content__poster"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
           <img src={apiConfig.w500Image(item.poster_path)} alt="" />
+          <div
+            className="user-rating"
+            style={{ transform: "scale(1.2)", paddingTop: "18px" }}
+          >
+            <UserRating
+              readOnly={true}
+              showButton={false}
+              user={user}
+              MediaType={"movie"}
+              item={item}
+            />
+          </div>
         </div>
       </div>
     </div>
