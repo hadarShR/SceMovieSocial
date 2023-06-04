@@ -10,6 +10,7 @@ import { getMediaList } from "../api/axiosClient";
 import GlobalLoading from "./GlobalLoading";
 import { UserAuth } from "../context/AuthContext";
 import UserRating from "./UserRating";
+import { OutlineButton } from "../components/Button";
 
 const HeroSlide = () => {
   const [popularMovies, setPopularMovies] = useState([]);
@@ -92,7 +93,13 @@ const HeroSlideItem = (props) => {
                   Read More
                 </Link>
               </Button>
-            ) : null}
+            ) : (
+              <OutlineButton>
+                <Link className="property-btn" to="/login">
+                  sign in to read More
+                </Link>
+              </OutlineButton>
+            )}
           </div>
         </div>
 

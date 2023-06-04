@@ -7,6 +7,7 @@ import apiConfig from "../api/apiConfig";
 import { UserAuth } from "../context/AuthContext";
 import Typography from "@mui/material/Typography";
 import ReadMoreIcon from "@mui/icons-material/ReadMore";
+import { OutlineButton } from "../components/Button";
 
 const MediaItem = ({ media, mediaType }) => {
   const [title, setTitle] = useState("");
@@ -64,15 +65,22 @@ const MediaItem = ({ media, mediaType }) => {
             >
               {user ? (
                 <Button>
-                <Typography variant="h6" style={{ fontWeight: "bold", marginTop: "1rem" }}>
-  Read More
-</Typography>
-<div style={{ paddingTop: "3px" }}>
-  <ReadMoreIcon fontSize="large" />
-</div>
+                  <Typography
+                    variant="h6"
+                    style={{ fontWeight: "bold", marginTop: "1rem" }}
+                  >
+                    Read More
+                  </Typography>
+                  <div style={{ paddingTop: "3px" }}>
+                    <ReadMoreIcon fontSize="large" />
+                  </div>
                 </Button>
               ) : (
-                <> </>
+                <OutlineButton className="small">
+                  <div>
+                    <Link to="/login">sign in to view more</Link>
+                  </div>
+                </OutlineButton>
               )}
             </Link>
             <h2>{releaseDate ? "(" + releaseDate + ")" : ""}</h2>

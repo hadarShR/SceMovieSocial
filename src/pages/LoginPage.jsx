@@ -11,6 +11,10 @@ import { toast } from "react-toastify";
 import { getDoc } from "firebase/firestore";
 
 const LoginPage = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const { googleSignIn, createUserDocument, user, userIsBlocked } =
     UserAuth() ?? {};
 
