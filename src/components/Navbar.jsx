@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { UserAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
   const { user, logOut, isLoading, isAdmin } = UserAuth() ?? {};
@@ -11,6 +12,19 @@ const Navbar = () => {
 
   const handlesSignOut = async () => {
     try {
+      // Show confirmation dialog
+      const confirmDelete = await Swal.fire({
+        title: "Are you sure you want to log-out?",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonText: "yes",
+        cancelButtonText: "no",
+        confirmButtonColor: "#f44336",
+        cancelButtonColor: "#2196f3",
+      });
+
+      if (!confirmDelete.isConfirmed) return;
+
       await logOut();
       localStorage.removeItem("isAdmin");
       navigate("/");
