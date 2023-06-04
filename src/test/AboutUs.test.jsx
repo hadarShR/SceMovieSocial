@@ -75,4 +75,90 @@ describe("AboutUs component", () => {
     expect(designerHeading).toHaveLength(1);
     expect(designerHeading.text()).toEqual("Designer");
   });
+
+  it('renders a h1 element', () => {
+    const wrapper = shallow(<AboutUs />);
+    expect(wrapper.find('h1')).toHaveLength(1);
+  });
+
+  it('renders a div with class "about"', () => {
+    const wrapper = shallow(<AboutUs />);
+    expect(wrapper.find('.about')).toHaveLength(1);
+  });
+
+  it('renders a div with class "row"', () => {
+    const wrapper = shallow(<AboutUs />);
+    expect(wrapper.find('.row')).toHaveLength(1);
+  });
+
+  it('renders a div with class "column"', () => {
+    const wrapper = shallow(<AboutUs />);
+    expect(wrapper.find('.column')).toHaveLength(2);
+  });
+
+  it('renders a div with class "tabs"', () => {
+    const wrapper = shallow(<AboutUs />);
+    expect(wrapper.find('.tabs')).toHaveLength(1);
+  });
+
+  it('renders a div with class "single-tab"', () => {
+    const wrapper = shallow(<AboutUs />);
+    expect(wrapper.find('.single-tab')).toHaveLength(0);
+  });
+
+  it('renders a div with class "about-img"', () => {
+    const wrapper = shallow(<AboutUs />);
+    expect(wrapper.find('.about-img')).toHaveLength(1);
+  });
+
+  it('renders a div with class "content"', () => {
+    const wrapper = shallow(<AboutUs />);
+    expect(wrapper.find('.content')).toHaveLength(3);
+  });
+
+  it('renders a h2 element within ".content"', () => {
+    const wrapper = shallow(<AboutUs />);
+    expect(wrapper.find('.content').find('h2')).toHaveLength(3);
+  });
+
+  it('renders a p element within ".content"', () => {
+    const wrapper = shallow(<AboutUs />);
+    expect(wrapper.find('.content').find('p')).toHaveLength(3);
+  });
+
+  it('renders a div with class "skills-row"', () => {
+    const wrapper = shallow(<AboutUs />);
+    expect(wrapper.find('.skills-row')).toHaveLength(1);
+  });
+
+  it('renders a div with class "skills-column"', () => {
+    const wrapper = shallow(<AboutUs />);
+    expect(wrapper.find('.skills-column')).toHaveLength(3);
+  });
+
+  it('renders a div with class "progress-wrap"', () => {
+    const wrapper = shallow(<AboutUs />);
+    expect(wrapper.find('.progress-wrap')).toHaveLength(3);
+  });
+
+  it('renders a div with class "progress"', () => {
+    const wrapper = shallow(<AboutUs />);
+    expect(wrapper.find('.progress')).toHaveLength(3);
+  });
+
+  it('renders a div with class "progress-bar"', () => {
+    const wrapper = shallow(<AboutUs />);
+    expect(wrapper.find('.progress-bar')).toHaveLength(3);
+  });
+
+  it('renders a span element within ".progress-bar"', () => {
+    const wrapper = shallow(<AboutUs />);
+    expect(wrapper.find('.progress-bar').find('span')).toHaveLength(3);
+  });
+
+  it('renders a div with class "exp-column"', () => {
+    const wrapper = shallow(<AboutUs />);
+    expect(wrapper.find('.exp-column')).toHaveLength(0);
+  });
+
 });
