@@ -4,11 +4,13 @@ import styled from "styled-components";
 import { UserAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router";
 import Swal from "sweetalert2";
+import { useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const { user, logOut, isLoading, isAdmin } = UserAuth() ?? {};
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
 
   const handlesSignOut = async () => {
     try {
@@ -77,25 +79,25 @@ const Navbar = () => {
 
         <div className="pages">
           <ul>
-            <li>
+            <li className={location.pathname === "/posts" ? "active" : ""}>
               <a href="/posts">Posts</a>
             </li>
-            <li>
+            <li className={location.pathname === "/movie" ? "active" : ""}>
               <a href="/movie">Movie</a>
             </li>
-            <li>
+            <li className={location.pathname === "/tv" ? "active" : ""}>
               <a href="/tv">TV</a>
             </li>
-            <li>
+            <li className={location.pathname === "/search" ? "active" : ""}>
               <a href="/search">Search</a>
             </li>
-            <li>
+            <li className={location.pathname === "/contactus" ? "active" : ""}>
               <a href="/contactus">Contact-us</a>
             </li>
-            <li>
+            <li className={location.pathname === "/aboutus" ? "active" : ""}>
               <a href="/aboutus">About-us</a>
             </li>
-            <li>
+            <li className={location.pathname === "/readmore" ? "active" : ""}>
               <a href="/readmore">Read-More</a>
             </li>
           </ul>
@@ -194,7 +196,8 @@ const Nav = styled.nav`
   }
 
   .dropdown-toggle:hover {
-    background-color: #023e8a;
+    background-color: #0761b9;
+    color: #fff;
   }
 
   .dropdown-menu {
@@ -242,6 +245,16 @@ const Nav = styled.nav`
     .dropdown button {
       padding: 0.5rem;
       padding-top: 0rem;
+    }
+  }
+  .pages ul li.active {
+    background-color: #333;
+    color: white;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    a {
+      color: white;
+      padding-top: 0.5rem;
     }
   }
 
