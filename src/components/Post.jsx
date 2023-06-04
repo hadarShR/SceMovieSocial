@@ -475,9 +475,14 @@ const Post = ({ post, user }) => {
                 )}
               </div>
             </div>
-            <div className="media-title">
-              <h1>{post?.title}</h1>
-            </div>
+            <Link
+              to="/detail"
+              state={{ item: post?.item, MediaType: post?.mediaType }}
+            >
+              <div className="media-title">
+                <h1>{post?.title}</h1>
+              </div>
+            </Link>
             <div className="postCenter">
               <span
                 className="postText"
@@ -491,7 +496,12 @@ const Post = ({ post, user }) => {
               >
                 {post?.text}
               </span>
-              <img className="postImg" src={background} alt={post?.imgURL} />
+              <Link
+                to="/detail"
+                state={{ item: post?.item, MediaType: post?.mediaType }}
+              >
+                <img className="postImg" src={background} alt={post?.imgURL} />
+              </Link>
             </div>
             <div className="postBottom">
               <div className="postBottomLeft">

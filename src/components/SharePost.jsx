@@ -71,6 +71,8 @@ const SharePost = ({ user, MediaType, item }) => {
       imgURL: item.backdrop_path ? item.backdrop_path : item.poster_path,
       text: postText,
       createdAt: date,
+      mediaType: MediaType,
+      item: item,
     };
 
     await setDoc(postDocRef, docData, { merge: true });
