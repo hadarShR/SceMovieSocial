@@ -28,6 +28,7 @@ import PostsPage from "./pages/PostsPage";
 import PostsReports from "./pages/PostsReports";
 import AddAdmin from "./pages/AddAdmin";
 import Faq from "./pages/Faq";
+import ReadMore from "./pages/ReadMore";
 
 const App = () => {
   const location = useLocation();
@@ -47,6 +48,7 @@ const App = () => {
           <Route path="/detail" element={<Detail />} />
           <Route path="/personDetails" element={<PersonDetail />} />
           <Route path="/aboutus" element={<AboutUs />} />
+          <Route path="/readmore" element={<ReadMore />} />
           <Route path="/contactus" element={<ContactUs />} />
           <Route path="/search" element={<Search />} />
           <Route path="/userprofile" element={<UserProfile />} />
