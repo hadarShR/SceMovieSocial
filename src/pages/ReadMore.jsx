@@ -25,21 +25,25 @@ const ReadMore = () => {
 
               <div className="tab-content">
                 <div className="content">
-                  <p style={{ fontWeight: "bold", color: "black" }}>
+                  <p
+                    style={{
+                      fontWeight: "bold",
+                      color: "black",
+                      fontSize: "1.2rem",
+                    }}
+                  >
                     Our site is first and foremost a social site designed to
                     connect users (students) through movies and series.
                     <th></th>
-                    
                   </p>
                   <p>
                     After logging in, a profile page is created for you - the
                     user, where you can update your personal details and also
-                    add a profile picture. In addition to this, you will be
-                    able to enter the posts page, where you can read posts that
-                    other users have written about movies and series that they
-                    have chosen to visit, you can respond to them on the post,
-                    like it, save it in your favorites, and also report if
-                    necessary.
+                    add a profile picture. In addition to this, you will be able
+                    to enter the posts page, where you can read posts that other
+                    users have written about movies and series that they have
+                    chosen to visit, you can respond to them on the post, like
+                    it, save it in your favorites, and also report if necessary.
                   </p>
                   <p>
                     On the home page, you can see movies and series by

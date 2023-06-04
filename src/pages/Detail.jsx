@@ -13,12 +13,15 @@ import FavoritesButton from "../components/FavoritesButton ";
 import { UserAuth } from "../context/AuthContext";
 import UserRating from "../components/UserRating";
 import SharePost from "../components/SharePost";
+import MediaReview from "../components/MediaReview";
+import styled from "styled-components";
 
 const Detail = () => {
   const { item, MediaType } = useLocation().state ?? {}; //getting props
   const [loading, setLoading] = useState(false);
   const [detail, setDetail] = useState(null);
   const [images, setImages] = useState(null);
+  const [showReviews, setShowReviews] = useState(false);
   const [runtime, setRuntime] = useState("");
   const [release_date, setReleaseDate] = useState("");
 
@@ -149,7 +152,6 @@ const Detail = () => {
                   </div>
                   <VideoSlideMemo type={MediaType} id={item.id} />
                 </div>
-
                 {/* media backdrop */}
                 <div
                   style={{
@@ -174,9 +176,7 @@ const Detail = () => {
                     <BackdropSlideMemo backdrops={images.backdrops} />
                   </div>
                 )}
-
                 {/* media backdrop */}
-
                 {/* media posters */}
                 <div
                   style={{
@@ -202,7 +202,6 @@ const Detail = () => {
                   </div>
                 )}
                 {/* media posters */}
-
                 {/* User Rating */}
                 <div
                   className="User-rating"
@@ -227,10 +226,98 @@ const Detail = () => {
                 </div>
                 {/* End of User Rating */}
 
+                <div
+                  className="section__header mb-2"
+                  style={{
+                    textDecorationLine: "underline",
+                    textDecorationColor: "#FFBA08",
+                    textDecorationThickness: "4px",
+
+                    textUnderlineOffset: "0.25rem",
+                    textAlign: "center",
+                    alignItems: "center",
+
+                    justifyContent: "center",
+                  }}
+                >
+                  <h2>Share a Post :</h2>
+                </div>
                 <div className="user-post">
                   <SharePost user={user} MediaType={MediaType} item={item} />
                 </div>
 
+                <div
+                  className="reviewButton"
+                  style={{
+                    textAlign: "center",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    paddingTop: "50px",
+                    paddingBottom: "50px",
+                  }}
+                >
+                  {" "}
+                  <>
+                    {!showReviews ? (
+                      <button
+                        className="postCommentText"
+                        style={{
+                          background: "#fca311",
+                          color: "#ffffff",
+                          border: "none",
+                          borderRadius: "4px",
+                          padding: "10px 20px",
+                          fontSize: "18px",
+                          fontWeight: "bold",
+                          cursor: "pointer",
+                          boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
+                        }}
+                        onClick={() => setShowReviews(!showReviews)}
+                      >
+                        View Reviews
+                      </button>
+                    ) : (
+                      <button
+                        className="postCommentText"
+                        style={{
+                          background: "#084c61",
+                          color: "#ffffff",
+                          border: "none",
+                          borderRadius: "4px",
+                          padding: "10px 20px",
+                          fontSize: "18px",
+                          fontWeight: "bold",
+                          cursor: "pointer",
+                          boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
+                        }}
+                        onClick={() => setShowReviews(!showReviews)}
+                      >
+                        Close Reviews
+                      </button>
+                    )}
+                  </>
+                </div>
+                <div
+                  className="review"
+                  style={{
+                    textAlign: "center",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    paddingBottom: "50px",
+                  }}
+                >
+                  {showReviews && (
+                    <StyledSection>
+                      <div className="mediaReview">
+                        <MediaReview
+                          id={item?.id}
+                          MediaType={MediaType}
+                          user={user}
+                        />
+                      </div>
+                    </StyledSection>
+                  )}
+                </div>
                 <div className="section mb-3">
                   <div
                     className="section__header mb-2"
@@ -254,5 +341,32 @@ const Detail = () => {
     </>
   );
 };
+const StyledSection = styled.section`
+  .mediaReview::-webkit-scrollbar {
+    width: 8px; /* set the width of the scrollbar */
+    padding-right: 1000px;
+  }
+
+  .mediaReview::-webkit-scrollbar-track {
+    background: #f5f5f5; /* set the color of the scrollbar track */
+  }
+
+  .mediaReview::-webkit-scrollbar-thumb {
+    background-color: #ccc; /* set the color of the scrollbar thumb */
+    border-radius: 8px; /* round the edges of the scrollbar thumb */
+    border: 2px solid #f5f5f5; /* add a border to the scrollbar thumb */
+  }
+
+  .mediaReview {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+    height: auto;
+    border-radius: 10px;
+    -webkit-box-shadow: 2px 2px 16px -8px rgba(0, 0, 0, 0.68);
+    box-shadow: 2px 2px 16px -8px rgba(0, 0, 0, 0.68);
+  }
+`;
 
 export default Detail;
