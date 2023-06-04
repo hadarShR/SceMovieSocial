@@ -8,6 +8,7 @@ import photoComingSoon from "../assets/photo-coming-soon.jpg";
 import { UserAuth } from "../context/AuthContext";
 import Typography from "@mui/material/Typography";
 import ReadMoreIcon from "@mui/icons-material/ReadMore";
+import { OutlineButton } from "../components/Button";
 
 const MovieCard = (props) => {
   const item = props.item;
@@ -30,14 +31,23 @@ const MovieCard = (props) => {
         <Link to="/detail" state={{ item: item, MediaType: type }}>
           {user ? (
             <Button>
-            <Typography variant="h6" style={{ fontWeight: "bold", marginTop: "1rem" }}>
-  Read More
-</Typography>
-<div style={{ paddingTop: "3px" }}>
-  <ReadMoreIcon fontSize="large" />
-</div>
+              <Typography
+                variant="h6"
+                style={{ fontWeight: "bold", marginTop: "1rem" }}
+              >
+                Read More
+              </Typography>
+              <div style={{ paddingTop: "3px" }}>
+                <ReadMoreIcon fontSize="large" />
+              </div>
             </Button>
-          ) : null}
+          ) : (
+            <OutlineButton className="small">
+              <div>
+                <Link to="/login">sign in to view more</Link>
+              </div>
+            </OutlineButton>
+          )}
         </Link>
       </div>
       <h3>{item.title || item.name}</h3>
