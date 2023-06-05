@@ -7,7 +7,7 @@ import "jest-extended";
 configure({ adapter: new Adapter() });
 
 jest.mock("react-router", () => ({
-    useNavigate: jest.fn(),
+    useNavigate: jest.fn(), useLocation: jest.fn,
   }));
 
 describe("Navbar", () => {

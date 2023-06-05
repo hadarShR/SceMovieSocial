@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { UserAuth } from "../context/AuthContext";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router";
 
 const Navbar = () => {
   const { user, logOut, isLoading, isAdmin } = UserAuth() ?? {};
