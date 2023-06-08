@@ -43,9 +43,7 @@ const MovieCard = (props) => {
             </Button>
           ) : (
             <OutlineButton className="small">
-              <div>
-                <Link to="/login">sign in to view more</Link>
-              </div>
+              <Link to="/login">sign in to view more</Link>
             </OutlineButton>
           )}
         </Link>
